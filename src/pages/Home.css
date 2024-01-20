@@ -1,0 +1,41 @@
+/* Home.module.css */
+.cell {
+  border: 1px solid black;
+  text-align: center;
+  cursor: pointer;
+  width: 100px;
+  height: 50px;
+}
+
+.cellRed {
+  background-color: red;
+  color: white;
+}
+
+.cellGreen {
+  background-color: green;
+  color: white;
+}
+
+.cellDefault {
+  background-color: white;
+  color: black;
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.headerCell {
+  border: 1px solid black;
+}
+
+.headerRow {
+  border: 1px solid black;
+}
+
+.headerRowSpan {
+  border: 1px solid black;
+  text-align: center;
+}
