@@ -9,33 +9,47 @@ const cols = [
   "7:35 pm", "7:40 pm", "8:20 pm", "8:30 pm", "8:45 pm"
 ]
 const names = ["Jessica", "Laurie", "Mark", "Mary", "Sally"];
-
+const rows = [
+  "Jessica", "Laurie", "Mark", "Mary", "Sally",
+  "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
+  "7:35 pm", "7:40 pm", "8:20 pm", "8:30 pm", "8:45 pm"
+]
+const mainRows = ["Name","Time","Day"]
 const initializeGrid = (name,sizeGrid) => Array.from({ length: sizeGrid }, (ele, index) => {
   let type;
   if (index <= 3) {
-    type = "Film";
+    type = mainRows[0];
   } else if (index >= 4 && index <= 8) {
-    type = "Day";
+    type = mainRows[1];
   } else {
-    type = "Time"
+    type =mainRows[2];
   }
   return { typeRow: name, status: null, typeCol: type, disable: false, valueCol: cols[index] }
 });
 
+const initializeGrids = () => {
+  const grids = [];
+  for (let i = 0; i < rows.length; i++) {
+    let type, count;
+    if (i < 5) {
+      type = 'Name';
+      count = 14;
+    } else if (i < 10) {
+      type = 'Time';
+      count = 10;
+    } else {
+      type = 'Day';
+      count = 5;
+    }
+    grids.push({ id: `grid${i}`, name: rows[i], items: initializeGrid(type, count) });
+  }
+  return grids;
+};
 
 function Home() {
   // const [grid, setGrid] = useState(Array.from({ length: 14 }, () => ({ status: null })));
-  const [grids, setGrids] = useState([
-    { id: 'grid0', name: 'Jessica', items: initializeGrid('Name',14) },
-    { id: 'grid2', name: 'Laurie', items: initializeGrid('Name',14) },
-    { id: 'grid3', name: 'Mark', items: initializeGrid('Name',14) },
-    { id: 'grid4', name: 'Mary', items: initializeGrid('Name',14) },
-    { id: 'grid5', name: 'Sally', items: initializeGrid('Name',14) },
+  const [grids, setGrids] = useState(initializeGrids());
 
-
-
-
-  ]);
   const [cellChecked, setCellChecked] = useState({ _typeRow: "", _typeCol: "", _gridId: "", _index: "" })
   const toggleCellStatus = (gridId, cellIndex) => {
     setGrids(current =>
@@ -126,9 +140,9 @@ function Home() {
         <tbody>
           {/* Data Row */}
           <>
-            {names.map((name, index) => (
+            {rows.map((value, index) => (
               <tr key={index}>
-                <td className="headerRowSpan">{name}</td>
+                <td className="headerRowSpan">{value}</td>
                 {grids[index].items.map((cell, colIdx) => (
                   <PersonalizedCell
                     key={colIdx}
