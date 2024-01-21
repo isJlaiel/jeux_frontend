@@ -24,7 +24,7 @@ const initializeGrid = (name,sizeGrid) => Array.from({ length: sizeGrid }, (ele,
   } else {
     type =mainRows[2];
   }
-  return { typeRow: name, status: null, typeCol: type, isAble: true, valueCol: cols[index] , changedBy:''}
+  return { typeRow: name, status: null, typeCol: type, isAble: true, valueCol: cols[index] , changedBy:[]}
 });
 
 const initializeGrids = () => {
@@ -65,7 +65,6 @@ function Home() {
                 return {
                   ...cell,
                   status: cell.status === 'red' ? 'green' : cell.status === 'green' ? null : 'red',
-                  changedBy : -1,
                 };
               }
 
@@ -91,12 +90,14 @@ function Home() {
         return {
           ...grid,
           items: grid.items.map((cell, i) => {
-            if (((cell.typeCol === cellChecked._typeCol && cellChecked._index !== i ) && (cell.changedBy===''|| cell.changedBy===cellChecked._index))) {
+            if (cell.typeCol === cellChecked._typeCol && cellChecked._index !== i){
+              let passedStatus = cellChecked.color === 'green' ? 'red' : null;
+              const updatedChangedBy = passedStatus === null ? cell.changedBy.filter(item => item !== cellChecked._index) : [...cell.changedBy, cellChecked._index];
               return {
                 ...cell,
                 isAble: cellChecked._isAble,
-                status: cellChecked.color==='green' ? 'red' : null  ,
-                changedBy:cellChecked._index,
+                status: updatedChangedBy.length !== 0 ? 'red' : null,
+                changedBy: updatedChangedBy,
               };
             }
             return cell;
@@ -106,13 +107,14 @@ function Home() {
         return {
           ...grid,
           items: grid.items.map((cell, i) => {
-            if (((cell.typeCol === cellChecked._typeCol && cellChecked._index === i && cell.typeRow === cellChecked._typeRow )&& (cell.changedBy===''|| cell.changedBy===cellChecked._index))) {
+            if (cell.typeCol === cellChecked._typeCol && cellChecked._index === i && cell.typeRow === cellChecked._typeRow) {
+              let passedStatus = cellChecked.color === 'green' ? 'red' : null;
+              const updatedChangedBy = passedStatus === null ? cell.changedBy.filter(item => item !== cellChecked._index) : [...cell.changedBy, cellChecked._index];
               return {
                 ...cell,
                 isAble: cellChecked._isAble,
-                status: cellChecked.color==='green' ? 'red' : null  ,
-                changedBy:cellChecked._index,
-
+                status: updatedChangedBy.length !== 0 ? 'red' : null,
+                changedBy: updatedChangedBy,
               };
             }
             return cell;
@@ -122,7 +124,6 @@ function Home() {
       return grid;
     }));
   }, [cellChecked]);
-
   // Render the table based on the grid
   return (
     <div>
