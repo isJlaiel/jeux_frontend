@@ -1,4 +1,4 @@
-const StyledCell = ({ status, toggleStatus, children }) => {
+const PersonalizedCell = ({ status, toggleStatus, children }) => {
     const getBackgroundColor = () => {
       if (status === 'red') return 'red';
       if (status === 'green') return 'green';
@@ -9,14 +9,18 @@ const StyledCell = ({ status, toggleStatus, children }) => {
       if (status === 'red' || status === 'green') return 'white';
       return 'black';
     };
-  
+    const handleClick = () => {
+      if (able) {
+        toggleStatus();
+      }
+    };
     return (
       <td
         onClick={toggleStatus}
         style={{
           border: '1px solid black',
           textAlign: 'center',
-          cursor: 'pointer',
+          cursor: 'pointer' ,
           width: '100px',
           height: '50px',
           backgroundColor: getBackgroundColor(),
@@ -27,4 +31,4 @@ const StyledCell = ({ status, toggleStatus, children }) => {
       </td>
     );
   };
-  export default StyledCell
+  export default PersonalizedCell;
