@@ -24,7 +24,7 @@ const initializeGrid = (name,sizeGrid) => Array.from({ length: sizeGrid }, (ele,
   } else {
     type =mainRows[2];
   }
-  return { typeRow: name, status: null, typeCol: type, disable: false, valueCol: cols[index] }
+  return { typeRow: name, status: null, typeCol: type, isAble: true, valueCol: cols[index] }
 });
 
 const initializeGrids = () => {
@@ -50,7 +50,7 @@ function Home() {
   // const [grid, setGrid] = useState(Array.from({ length: 14 }, () => ({ status: null })));
   const [grids, setGrids] = useState(initializeGrids());
 
-  const [cellChecked, setCellChecked] = useState({ _typeRow: "", _typeCol: "", _gridId: "", _index: "" })
+  const [cellChecked, setCellChecked] = useState({ _typeRow: "", _typeCol: "", _gridId: "", _index: "", _isAble:"" })
   const toggleCellStatus = (gridId, cellIndex) => {
     setGrids(current =>
       current.map(grid => {
@@ -61,7 +61,7 @@ function Home() {
             items: grid.items.map((cell, index) => {
               if (index === cellIndex) {
                 if (cell.status === 'red' || cell.status == "green")
-                  setCellChecked({ _typeRow: cell.typeRow, _typeCol: cell.typeCol, _gridId: gridId, _index: index, color: cell.status === 'red' ? 'red' : cell.status === 'green' ? null : null });
+                  setCellChecked({ _typeRow: cell.typeRow, _typeCol: cell.typeCol, _gridId: gridId, _index: index, color: cell.status === 'red' ? 'green' : cell.status === 'red' ? null : null ,_isAble:cell.status!=='red'});
                 return {
                   ...cell,
                   status: cell.status === 'red' ? 'green' : cell.status === 'green' ? null : 'red',
@@ -93,8 +93,8 @@ function Home() {
             if ((cell.typeCol === cellChecked._typeCol && cellChecked._index !== i)) {
               return {
                 ...cell,
-                disable: true,
-                status: cellChecked.color,
+                isAble: cellChecked._isAble,
+                status: cellChecked.color==='green' ? 'red' : null  ,
               };
             }
             return cell;
@@ -107,8 +107,8 @@ function Home() {
             if ((cell.typeCol === cellChecked._typeCol && cellChecked._index === i && cell.typeRow === cellChecked._typeRow)) {
               return {
                 ...cell,
-                disable: true,
-                status: cellChecked.color,
+                isAble: cellChecked._isAble,
+                status: cellChecked.color==='green' ? 'red' : null  ,
               };
             }
             return cell;
@@ -127,18 +127,15 @@ function Home() {
         <thead>
           <tr>
             <th className="headerCell" rowSpan={2}></th>
-
             <th className="headerCell" colSpan={4}>{MainCols[0]}</th>
             <th className="headerCell" colSpan={5}>{MainCols[1]}</th>
             <th className="headerCell" colSpan={5}>{MainCols[2]}</th>
           </tr>
           <tr>
             {cols.map(col => (<th className="headerCell">{col}</th>))}
-
           </tr>
         </thead>
         <tbody>
-          {/* Data Row */}
           <>
             {rows.map((value, index) => (
               <tr key={index}>
@@ -148,6 +145,7 @@ function Home() {
                     key={colIdx}
                     status={cell.status}
                     toggleStatus={() => toggleCellStatus(grids[index].id, colIdx)}
+                    able={cell.isAble}
                   />
                 ))}
               </tr>
