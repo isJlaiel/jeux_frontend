@@ -4,7 +4,7 @@ import PersonalizedCell from '../compenents/PersonalizedCell';
 // Custom styled td component
 const MainCols = ["Film", "Day", "Time"];
 const cols = [
-  "88 Minutes", "	Donnie Brasco", "Scarface", "The Recruit",
+  "88 Minutes", "	Donnie Brasco","Scarecrow", "Scarface", "The Recruit",
   "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
   "7:35 pm", "7:40 pm", "8:20 pm", "8:30 pm", "8:45 pm"
 ]
@@ -17,9 +17,9 @@ const rows = [
 const mainRows = ["Name","Time","Day"]
 const initializeGrid = (name,sizeGrid) => Array.from({ length: sizeGrid }, (ele, index) => {
   let type;
-  if (index <= 3) {
+  if (index <= 4) {
     type = mainRows[0];
-  } else if (index >= 4 && index <= 8) {
+  } else if (index >= 5 && index <= 9) {
     type = mainRows[1];
   } else {
     type =mainRows[2];
@@ -33,7 +33,7 @@ const initializeGrids = () => {
     let type, count;
     if (i < 5) {
       type = 'Name';
-      count = 14;
+      count = 15;
     } else if (i < 10) {
       type = 'Time';
       count = 10;
@@ -132,7 +132,7 @@ function Home() {
         <thead>
           <tr>
             <th className="headerCell" rowSpan={2}></th>
-            <th className="headerCell" colSpan={4}>{MainCols[0]}</th>
+            <th className="headerCell" colSpan={5}>{MainCols[0]}</th>
             <th className="headerCell" colSpan={5}>{MainCols[1]}</th>
             <th className="headerCell" colSpan={5}>{MainCols[2]}</th>
           </tr>
