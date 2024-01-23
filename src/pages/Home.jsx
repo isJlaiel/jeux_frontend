@@ -8,7 +8,6 @@ const cols = [
   "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
   "7:35 pm", "7:40 pm", "8:20 pm", "8:30 pm", "8:45 pm"
 ]
-const names = ["Jessica", "Laurie", "Mark", "Mary", "Sally"];
 const rows = [
   "Jessica", "Laurie", "Mark", "Mary", "Sally",
   "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
@@ -127,11 +126,13 @@ function Home() {
   // Render the table based on the grid
   return (
     <div>
-      <table style={{ borderCollapse: 'collapse', width: '60%' }}>
+      <table style={{ borderCollapse: 'collapse', width: '50%' }}>
         {/* Header Rows */}
         <thead>
           <tr>
             <th className="headerCell" rowSpan={2}></th>
+            <th className="headerCell" rowSpan={2}></th>
+
             <th className="headerCell" colSpan={5}>{MainCols[0]}</th>
             <th className="headerCell" colSpan={5}>{MainCols[1]}</th>
             <th className="headerCell" colSpan={5}>{MainCols[2]}</th>
@@ -144,7 +145,11 @@ function Home() {
           <>
             {rows.map((value, index) => (
               <tr key={index}>
-                <td className="headerRowSpan">{value}</td>
+                {(index ===0  || index ===5  || index ===10 )?<td rowSpan={5}>{index===0 ? "Name" :( index==5 ? "Day" : "Time")}</td>: <></>}
+
+                <td className="headerRowSpan">
+                  
+                  {value}</td>
                 {grids[index].items.map((cell, colIdx) => (
                   <PersonalizedCell
                     key={colIdx}
