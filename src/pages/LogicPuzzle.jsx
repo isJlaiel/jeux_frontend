@@ -1,55 +1,44 @@
 import React, { useEffect, useState } from 'react';
-import './Home.css';
+import './logicPuzzle.css';
 import PersonalizedCell from '../compenents/PersonalizedCell';
-// Custom styled td component
-const MainCols = ["Film", "Day", "Time"];
-const cols = [
-  "88 Minutes", "	Donnie Brasco","Scarecrow", "Scarface", "The Recruit",
-  "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
-  "7:35 pm", "7:40 pm", "8:20 pm", "8:30 pm", "8:45 pm"
-]
-const rows = [
-  "Jessica", "Laurie", "Mark", "Mary", "Sally",
-  "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
-  "7:35 pm", "7:40 pm", "8:20 pm", "8:30 pm", "8:45 pm"
-]
-const mainRows = ["Name","Time","Day"]
-const initializeGrid = (name,sizeGrid) => Array.from({ length: sizeGrid }, (ele, index) => {
-  let type;
-  if (index <= 4) {
-    type = mainRows[0];
-  } else if (index >= 5 && index <= 9) {
-    type = mainRows[1];
-  } else {
-    type =mainRows[2];
-  }
-  return { typeRow: name, status: null, typeCol: type, isAble: true, valueCol: cols[index] , changedBy:[]}
-});
 
-const initializeGrids = () => {
-  const grids = [];
-  for (let i = 0; i < rows.length; i++) {
-    let type, count;
-    if (i < 5) {
-      type = 'Name';
-      count = 15;
-    } else if (i < 10) {
-      type = 'Time';
-      count = 10;
+
+
+function LogicPuzzle({ mainCols, cols, rows, mainRows }) {
+
+  const initializeGrid = (name, sizeGrid) => Array.from({ length: sizeGrid }, (ele, index) => {
+    let type;
+    if (index <= 4) {
+      type = mainRows[0];
+    } else if (index >= 5 && index <= 9) {
+      type = mainRows[1];
     } else {
-      type = 'Day';
-      count = 5;
+      type = mainRows[2];
     }
-    grids.push({ id: `grid${i}`, name: rows[i], items: initializeGrid(type, count) });
-  }
-  return grids;
-};
+    return { typeRow: name, status: null, typeCol: type, isAble: true, valueCol: cols[index], changedBy: [] }
+  });
 
-function Home() {
-  // const [grid, setGrid] = useState(Array.from({ length: 14 }, () => ({ status: null })));
+  const initializeGrids = () => {
+    const grids = [];
+    for (let i = 0; i < rows.length; i++) {
+      let type, count;
+      if (i < 5) {
+        type = mainRows[0];
+        count = 15;
+      } else if (i < 10) {
+        type = mainRows[1];
+        count = 10;
+      } else {
+        type = mainRows[2];
+        count = 5;
+      }
+      grids.push({ id: `grid${i}`, name: rows[i], items: initializeGrid(type, count) });
+    }
+    return grids;
+  };
   const [grids, setGrids] = useState(initializeGrids());
+  const [cellChecked, setCellChecked] = useState({ _typeRow: "", _typeCol: "", _gridId: "", _index: "", _isAble: "" })
 
-  const [cellChecked, setCellChecked] = useState({ _typeRow: "", _typeCol: "", _gridId: "", _index: "", _isAble:"" })
   const toggleCellStatus = (gridId, cellIndex) => {
     setGrids(current =>
       current.map(grid => {
@@ -60,7 +49,7 @@ function Home() {
             items: grid.items.map((cell, index) => {
               if (index === cellIndex) {
                 if (cell.status === 'red' || cell.status == "green")
-                  setCellChecked({ _typeRow: cell.typeRow, _typeCol: cell.typeCol, _gridId: gridId, _index: index, color: cell.status === 'red' ? 'green' : cell.status === 'red' ? null : null ,_isAble:cell.status!=='red'});
+                  setCellChecked({ _typeRow: cell.typeRow, _typeCol: cell.typeCol, _gridId: gridId, _index: index, color: cell.status === 'red' ? 'green' : cell.status === 'red' ? null : null, _isAble: cell.status !== 'red' });
                 return {
                   ...cell,
                   status: cell.status === 'red' ? 'green' : cell.status === 'green' ? null : 'red',
@@ -78,18 +67,20 @@ function Home() {
 
 
   const handleClick = () => {
-    grids.map((ele) => {
-      console.log(ele.items.map(e => console.log(e.valueCol + " " + ele.name + " " + e.status)));
-
+    grids.forEach((ele) => {
+      const greenItems = ele.items.filter(e => e.status === "green");
+      greenItems.forEach(e => console.log(e.valueCol + " " + ele.name + " "));
     });
   };
+
+
   useEffect(() => {
     setGrids(current => current.map(grid => {
       if (grid.id === cellChecked._gridId) {
         return {
           ...grid,
           items: grid.items.map((cell, i) => {
-            if (cell.typeCol === cellChecked._typeCol && cellChecked._index !== i){
+            if (cell.typeCol === cellChecked._typeCol && cellChecked._index !== i) {
               let passedStatus = cellChecked.color === 'green' ? 'red' : null;
               const updatedChangedBy = passedStatus === null ? cell.changedBy.filter(item => item !== cellChecked._index) : [...cell.changedBy, cellChecked._index];
               return {
@@ -125,17 +116,16 @@ function Home() {
   }, [cellChecked]);
   // Render the table based on the grid
   return (
-    <div>
-      <table style={{ borderCollapse: 'collapse', width: '50%' }}>
+    <div >
+      <table className='table'>
         {/* Header Rows */}
         <thead>
           <tr>
-            <th className="headerCell" rowSpan={2}></th>
-            <th className="headerCell" rowSpan={2}></th>
+            <th className="headerCell" colSpan={2} rowSpan={2}></th>
 
-            <th className="headerCell" colSpan={5}>{MainCols[0]}</th>
-            <th className="headerCell" colSpan={5}>{MainCols[1]}</th>
-            <th className="headerCell" colSpan={5}>{MainCols[2]}</th>
+            <th className="headerCell" colSpan={5}>{mainCols[0]}</th>
+            <th className="headerCell" colSpan={5}>{mainCols[1]}</th>
+            <th className="headerCell" colSpan={5}>{mainCols[2]}</th>
           </tr>
           <tr>
             {cols.map(col => (<th className="headerCell">{col}</th>))}
@@ -145,10 +135,14 @@ function Home() {
           <>
             {rows.map((value, index) => (
               <tr key={index}>
-                {(index ===0  || index ===5  || index ===10 )?<td rowSpan={5}>{index===0 ? "Name" :( index==5 ? "Day" : "Time")}</td>: <></>}
-
+                {
+                  (index === 0 || index === 5 || index === 10) ?
+                    <td className="rowSpanCell" rowSpan={5}>
+                      {index === 0 ? mainRows[0] : (index === 5 ? mainRows[2] : mainRows[1])}
+                    </td> : null
+                }
                 <td className="headerRowSpan">
-                  
+
                   {value}</td>
                 {grids[index].items.map((cell, colIdx) => (
                   <PersonalizedCell
@@ -170,4 +164,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default LogicPuzzle;

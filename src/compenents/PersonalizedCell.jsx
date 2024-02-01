@@ -24,8 +24,7 @@ const PersonalizedCell = ({ status, toggleStatus, children, able }) => {
         border: '1px solid black',
         textAlign: 'center',
         cursor: able ? 'pointer' : 'not-allowed', // Change le curseur en fonction de `able`
-        width: '100px',
-        height: '50px',
+
         backgroundColor: getBackgroundColor(),
         color: getColor(),
       }}
