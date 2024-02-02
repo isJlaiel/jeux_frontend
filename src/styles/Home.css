@@ -1,0 +1,32 @@
+.home {
+    text-align: center;
+    padding: 20px;
+}
+
+.nav {
+    background-color: #f0f0f0;
+    padding: 10px 0;
+}
+
+.navList {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto; /* Centrer la liste dans le nav */
+    width: max-content; /* S'assurer que la largeur de la liste correspond à son contenu */
+}
+
+.navItem {
+    display: block; /* Afficher chaque élément de la liste sur sa propre ligne */
+    margin: 10px 0; /* Ajouter un peu d'espace entre les éléments */
+}
+
+.navLink {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.navLink:hover {
+    color: #007bff;
+}

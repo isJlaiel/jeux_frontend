@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import './logicPuzzle.css';
+import '../styles/logicPuzzle.css';
 import PersonalizedCell from '../compenents/PersonalizedCell';
 
 
 
-function LogicPuzzle({ mainCols, cols, rows, mainRows }) {
+function LogicPuzzle({ mainCols, cols, rows, mainRows, clues, intro, puzzleType ,puzzleName,data }) {
 
   const initializeGrid = (name, sizeGrid) => Array.from({ length: sizeGrid }, (ele, index) => {
     let type;
@@ -37,7 +37,18 @@ function LogicPuzzle({ mainCols, cols, rows, mainRows }) {
     return grids;
   };
   const [grids, setGrids] = useState(initializeGrids());
+
+
   const [cellChecked, setCellChecked] = useState({ _typeRow: "", _typeCol: "", _gridId: "", _index: "", _isAble: "" })
+
+  const [clickedItems, setClickedItems] = useState([]);
+
+  const toggleItem = (index) => {
+    setClickedItems(prev => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
+  };
 
   const toggleCellStatus = (gridId, cellIndex) => {
     setGrids(current =>
@@ -114,9 +125,22 @@ function LogicPuzzle({ mainCols, cols, rows, mainRows }) {
       return grid;
     }));
   }, [cellChecked]);
-  // Render the table based on the grid
   return (
-    <div >
+    <div  >
+      <div >
+      <h1>{puzzleName}<small>{puzzleType}</small>
+      </h1>
+      <p>{intro}</p>
+
+      </div>
+      <div className='clues'>
+        {clues.map((value, index) => (
+          <li
+            key={index}
+            className={clickedItems[index] ? 'strikethrough' : ''}
+            onClick={() => toggleItem(index)}>{value}</li>))
+        }
+      </div>
       <table className='table'>
         {/* Header Rows */}
         <thead>
@@ -128,7 +152,7 @@ function LogicPuzzle({ mainCols, cols, rows, mainRows }) {
             <th className="headerCell" colSpan={5}>{mainCols[2]}</th>
           </tr>
           <tr>
-            {cols.map(col => (<th className="headerCell">{col}</th>))}
+            {cols.map(col => (<th className="vertical-header">{col}</th>))}
           </tr>
         </thead>
         <tbody>
@@ -149,7 +173,7 @@ function LogicPuzzle({ mainCols, cols, rows, mainRows }) {
                     key={colIdx}
                     status={cell.status}
                     toggleStatus={() => toggleCellStatus(grids[index].id, colIdx)}
-                    able={cell.isAble}
+                    isAble={cell.changedBy.filter((item) => item != -1).length == 0}
                   />
                 ))}
               </tr>
@@ -158,9 +182,12 @@ function LogicPuzzle({ mainCols, cols, rows, mainRows }) {
 
         </tbody>
       </table>
-      <button onClick={handleClick}>Submit</button>
+      <div className="conteneur-bouton">
 
-    </div>
+      <button id="btn" className="submit" onClick={handleClick}>Test</button>
+      <button id="btn" className="submit" onClick={handleClick}>Submit</button>
+      </div>
+    </div >
   );
 }
 

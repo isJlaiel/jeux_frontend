@@ -1,4 +1,4 @@
-const PersonalizedCell = ({ status, toggleStatus, children, able }) => {
+const PersonalizedCell = ({ status, toggleStatus, children, isAble }) => {
   const getBackgroundColor = () => {
     if (status === 'red') return 'red';
     if (status === 'green') return 'green';
@@ -11,7 +11,7 @@ const PersonalizedCell = ({ status, toggleStatus, children, able }) => {
   };
 
   const handleClick = () => {
-    if (able) { 
+     if (isAble) { 
       toggleStatus();
     }
     // Si `able` est false, rien ne se passe lors du clic
@@ -23,7 +23,7 @@ const PersonalizedCell = ({ status, toggleStatus, children, able }) => {
       style={{
         border: '1px solid black',
         textAlign: 'center',
-        cursor: able ? 'pointer' : 'not-allowed', // Change le curseur en fonction de `able`
+        cursor: isAble  ? 'pointer' : 'not-allowed', // Change le curseur en fonction de `able`
 
         backgroundColor: getBackgroundColor(),
         color: getColor(),

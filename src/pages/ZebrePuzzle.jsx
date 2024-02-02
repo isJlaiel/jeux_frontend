@@ -1,13 +1,7 @@
 import React, { useState } from 'react';
-import './ZebrePuzzle.css'
-const cols = ["Shirt", "Name", "Surname", "Pasta", "Wine", "Age"];
-const valuesShirt = ["blue", "green", "red", "white", "yellow"];
-const valuesName = ["Andrea", "Holly", "Julie", "Leslie", "Victoria"];
-const valuesSurname = ["Brown", "Davis", "Lopes", "Miller", "Wilson"];
-const valuesPasta = ["farfalle", "lasagne", "penne", "spaghetti", "ravioli"];
-const valuesWine = ["Cabernet", "Merlot", "Pinot Noir", "Sangiovese", "Syrah"];
-const valuesAge = ["30 years", "35 years", "40 years", "45 years", "50 years"];
-const womenCount = 5; // The number of women
+import '../styles/ZebrePuzzle.css'
+import '../styles/TextStyles.css'
+import { clues, intro, womenCount, valuesAge, valuesName, valuesSurname, valuesPasta, valuesWine, cols, valuesShirt } from "../data/DataZebre"
 
 function ZebrePuzzle() {
   const [womans, setWomans] = useState(
@@ -22,6 +16,14 @@ function ZebrePuzzle() {
     }))
   );
 
+  const [clickedItems, setClickedItems] = useState([]);
+
+  const toggleItem = (index) => {
+    setClickedItems(prev => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
+  };
   const handleSelectionChange = (womanId, field, value) => {
     const updatedWomans = womans.map(woman => {
       if (woman.id === womanId) {
@@ -43,38 +45,60 @@ function ZebrePuzzle() {
       default: return [];
     }
   };
-
+  const handleClick = () => {
+    console.log("here")
+  }
   return (
-    <table style={{ borderCollapse: 'collapse', width: '100%' }}>
-      <thead>
-        <tr>
-          <th></th>
-          {womans.map((_, id) => (
-            <th key={id}>Woman #{id + 1}</th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {cols.map((col, index) => (
-          <tr key={index}>
-            <td>{col}</td>
-            {womans.map((woman) => (
-              <td key={woman.id}>
-                <select
-                  value={woman[col.toLowerCase()]}
-                  onChange={(e) => handleSelectionChange(woman.id, col.toLowerCase(), e.target.value)}
-                >
-                  <option value=""></option>
-                  {getValueOptions(col).map((option, index) => (
-                    <option key={index} value={option}>{option}</option>
-                  ))}
-                </select>
-              </td>
-            ))}
-          </tr>
+    <div >
+      <h1>Pasta and Wine<small> Zebra Puzzle</small>
+      </h1>
+      <p>{intro}</p>
+      <div className='grid-container'>
+        {clues.map((value, index) => (
+          <li
+            key={index}
+            className={clickedItems[index] ? 'strikethrough' : ''}
+            onClick={() => toggleItem(index)}>{value}</li>
         ))}
-      </tbody>
-    </table>
+      </div>
+      <div class="tableContainer">
+        <table className='tableZebre'>
+          <thead>
+            <tr>
+              <th></th>
+              {womans.map((_, id) => (
+                <th key={id}>Woman #{id + 1}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {cols.map((col, index) => (
+              <tr key={index}>
+                <td>{col}</td>
+                {womans.map((woman) => (
+                  <td key={woman.id} className='col'>
+                    <select
+                      value={woman[col.toLowerCase()]}
+                      onChange={(e) => handleSelectionChange(woman.id, col.toLowerCase(), e.target.value)}
+                      className='selectTable'
+                    >
+                      <option value=""></option>
+                      {getValueOptions(col).map((option, index) => (
+                        <option key={index} value={option}>{option}</option>
+                      ))}
+                    </select>
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <button id="btn" onClick={handleClick}>Test</button>
+      <button id="btn" onClick={handleClick}>Submit</button>
+
+    </div>
+
   );
 }
 

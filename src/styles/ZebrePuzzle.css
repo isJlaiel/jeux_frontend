@@ -1,0 +1,65 @@
+.tableContainer {
+  margin-left: 300px;
+  justify-content: center;
+  align-items: center;
+  width: 90%; /* Réduction supplémentaire de la largeur pour un aspect plus compact */
+}
+
+
+.tableZebre {
+  margin-top: 80px;
+  width: 80%; /* Réduction supplémentaire de la largeur pour un aspect plus compact */
+  border-collapse: collapse;
+}
+
+.col, .th {
+  text-align: center;
+  padding: 4px; /* Réduction du padding pour diminuer l'espace */
+  font-size: 18px; /* Réduction de la taille du texte pour un aspect plus compact */
+}
+
+.th {
+  background-color: #f0f0f0;
+}
+
+
+tr:nth-child(even) {
+  background-color: #f9f9f9; 
+}
+.selectTable {
+  border: 1px solid #ccc;
+  padding: 2px; /* Réduction du padding */
+  background-color: white;
+  width: 50%; /* Réduction de la largeur pour un aspect plus compact */
+  margin: auto;
+}
+
+
+
+h1 {
+  font-size: 24px; /* Taille réduite pour le titre */
+}
+
+p, .clues {
+  font-size: 16px; /* Taille réduite pour le texte */
+  line-height: 1.2; /* Ajustement de l'espacement des lignes */
+}
+
+td, th {
+  font-size: 16px; /* Taille réduite pour le texte dans les cellules */
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Crée deux colonnes de largeur égale */
+  gap: 10px; /* Espacement entre les colonnes et les lignes */
+  align-items: start; /* Alignement des éléments en début de chaque cellule de grille */
+  justify-items: start; /* Alignement horizontal des éléments de grille */
+  align-items: start; /* Alignement vertical des éléments de grille */
+  font-size: 15px;
+
+}
+
+li.strikethrough {
+  text-decoration: line-through;
+}
