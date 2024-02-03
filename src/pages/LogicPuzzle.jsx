@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import '../styles/logicPuzzle.css';
 import PersonalizedCell from '../compenents/PersonalizedCell';
 
-
-
-function LogicPuzzle({ mainCols, cols, rows, mainRows, clues, intro, puzzleType, puzzleName }) {
-
+import axios from 'axios';
+function LogicPuzzle({ mainCols, cols, rows, mainRows, clues, intro, puzzleType, puzzleName , idGame}) {
+  const idGameValue = idGame ? idGame : 0;
   const initializeGrid = (name, value, sizeGrid) => Array.from({ length: sizeGrid }, (ele, index) => {
     let type;
     if (index <= 4) {
@@ -109,8 +108,26 @@ function LogicPuzzle({ mainCols, cols, rows, mainRows, clues, intro, puzzleType,
 
       });
     });
-    console.log(_data);
+    let dataStr = JSON.stringify(_data);
+    dataStr = dataStr.trim().slice(1, -1).replace(/},{/g, "}|{")+"|";
+    console.log(dataStr);
 
+    axios.get(`http://localhost:8000/modelresolver/solve/${idGameValue}/${dataStr}`, {
+      headers: {
+       
+      }
+    })
+    .then(function (response) {
+      // handle success
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .then(function () {
+      // always executed
+    });
   };
 
 

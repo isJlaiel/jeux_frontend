@@ -2,17 +2,18 @@ import React, { useState } from 'react';
 import '../styles/ZebrePuzzle.css'
 import '../styles/TextStyles.css'
 import { clues, intro, womenCount, valuesAge, valuesName, valuesSurname, valuesPasta, valuesWine, cols, valuesShirt } from "../data/DataZebre"
+import axios from 'axios';
 
 function ZebrePuzzle() {
   const [womans, setWomans] = useState(
     Array.from({ length: womenCount }, (_, index) => ({
       id: index + 1,
-      shirt: '',
-      name: '',
-      surname: '',
-      pasta: '',
-      wine: '',
-      age: '',
+      Name: '',
+      Shirt: '',
+      Surname: '',
+      Pasta: '',
+      Wine: '',
+      Age: '',
     }))
   );
 
@@ -46,8 +47,32 @@ function ZebrePuzzle() {
     }
   };
   const handleClick = () => {
-    console.log(womans);
-  }
+    const data = ""
+    womans.forEach(w=>{
+      delete w.id ;
+    })
+   let dataStr = JSON.stringify(womans.filter((w)=> w.Name != "" && w.Age!=""&& w.Wine && w.Pasta && w.Shirt && w.Surname != ""));
+
+    dataStr = dataStr.trim().slice(1, -1).replace(/},{/g, "}|{")+"|";
+    console.log(dataStr);
+  
+    axios.get(`http://localhost:8000/modelresolver/solve/3/${dataStr}`, {
+      headers: {
+       
+      }
+    })
+    .then(function (response) {
+      // handle success
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .then(function () {
+      // always executed
+    });
+  };
   return (
     <div >
 
@@ -81,8 +106,8 @@ function ZebrePuzzle() {
                 {womans.map((woman) => (
                   <td key={woman.id} className='col'>
                     <select
-                      value={woman[col.toLowerCase()]}
-                      onChange={(e) => handleSelectionChange(woman.id, col.toLowerCase(), e.target.value)}
+                      value={woman[col]}
+                      onChange={(e) => handleSelectionChange(woman.id, col, e.target.value)}
                       className='selectTable'
                     >
                       <option value=""></option>
@@ -97,7 +122,7 @@ function ZebrePuzzle() {
           </tbody>
         </table>
       </div>
-      <button className="submitZebre" onClick={handleClick}>Chack Answer</button>
+      <button className="submitZebre" onClick={handleClick}>Check Answer</button>
 
     </div>
 

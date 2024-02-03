@@ -68,7 +68,7 @@ td, th {
   align-items: start; /* Alignement des éléments en début de chaque cellule de grille */
   justify-items: start; /* Alignement horizontal des éléments de grille */
   align-items: start; /* Alignement vertical des éléments de grille */
-  font-size: 15px;
+  font-size: 16px;
 
 }
 

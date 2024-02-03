@@ -27,6 +27,12 @@ function Home() {
                               <p className="block-text">The Zebra Puzzle is an very interesting type of logic puzzle. This puzzle was supposedly invented by Albert Einstein when he created the Einstein's Puzzle.</p>
              
           </div>
+          <div className="content-block">
+          <Link to="/personnalizedPuzzle"  className="navLink">Personnalize your puzzle
+                          </Link>
+                              <p className="block-text">peronnalize your puzzle.</p>
+             
+          </div>
         </section>
       </div>
     )

@@ -1,12 +1,12 @@
 
 const mainCols = ["Film", "Day", "Time"];
 const cols = [
-  "88 Minutes", "	Donnie Brasco","Scarecrow", "Scarface", "The Recruit",
+  "Minutes88", "DonnieBrasco","Scarecrow", "Scarface", "TheRecruit",
   "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
   "7:35 pm", "7:40 pm", "8:20 pm", "8:30 pm", "8:45 pm"
 ]
 const rows = [
-  "Jessica", "Laurie", "Mark", "Mary", "Sally",
+  "Jessica", "Laurie", "Mark", "Marry", "Sally",
   "7:35 pm", "7:40 pm", "8:20 pm", "8:30 pm", "8:45 pm",
   "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
 
@@ -23,7 +23,7 @@ const clues =[
 ]
 const mainRows = ["Name","Time","Day"]
 const puzzleName = "Movie Buffs Associated - Al Pacino  ";
-const puzzleType = "Logic Puzzle";
+const puzzleType = " Logic Puzzle";
 const intro = "A five-member panel, determined by a ballot of members of the local Movie Buffs Associated at the Annual General Meeting, select a series of movies, starring a particular actor/actress, to be shown in the Municipal Offices function room each evening from Monday to Friday. The panel of Sally Boyden, Mark Thomson, Jessica Farmer, Laurie Davison and Mary Peters were re-elected for 2015. \n Last week their choice actor/actress was Al Pacino, and the films chosen - one per member - were Scarface (1983), Scarecrow (1973), Donnie Brasco (1997), 88 Minutes (2007), and The Recruit (2003). The films chosen were not respective, and neither were they shown in that order, nor in the order in which they were released. Showing time differed each evening. From this information and the following clues, for each member, can you determine who chose which film, the day on which it was shown, and at what time?"
 
 
