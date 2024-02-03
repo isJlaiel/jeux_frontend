@@ -46,10 +46,12 @@ function ZebrePuzzle() {
     }
   };
   const handleClick = () => {
-    console.log("here")
+    console.log(womans);
   }
   return (
     <div >
+
+    <div className='title' >
       <h1>Pasta and Wine<small> Zebra Puzzle</small>
       </h1>
       <p>{intro}</p>
@@ -61,7 +63,8 @@ function ZebrePuzzle() {
             onClick={() => toggleItem(index)}>{value}</li>
         ))}
       </div>
-      <div class="tableContainer">
+      </div>
+      <div className="tableContainer">
         <table className='tableZebre'>
           <thead>
             <tr>
@@ -94,8 +97,7 @@ function ZebrePuzzle() {
           </tbody>
         </table>
       </div>
-      <button id="btn" onClick={handleClick}>Test</button>
-      <button id="btn" onClick={handleClick}>Submit</button>
+      <button className="submitZebre" onClick={handleClick}>Chack Answer</button>
 
     </div>
 

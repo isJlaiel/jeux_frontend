@@ -1,11 +1,21 @@
 .tableContainer {
-  margin-left: 300px;
+  margin-left: 200px;
   justify-content: center;
   align-items: center;
-  width: 90%; /* Réduction supplémentaire de la largeur pour un aspect plus compact */
+  width: 100%; /* Réduction supplémentaire de la largeur pour un aspect plus compact */
+  margin-bottom: 30px;
 }
 
-
+.title {
+  font-size: 28px; /* Taille de la police */
+  font-family: Arial, sans-serif; /* Police de caractères */
+  color: #333; /* Couleur du texte */
+  text-align: center; /* Alignement du texte */
+  background-color: #F2F2F2; /* Couleur de fond */
+  padding: 10px; /* Espace intérieur du titre */
+  border: 2px solid #666; /* Bordure */
+  border-radius: 10px; /* Coins arrondis */
+}
 .tableZebre {
   margin-top: 80px;
   width: 80%; /* Réduction supplémentaire de la largeur pour un aspect plus compact */
@@ -41,8 +51,10 @@ h1 {
 }
 
 p, .clues {
-  font-size: 16px; /* Taille réduite pour le texte */
-  line-height: 1.2; /* Ajustement de l'espacement des lignes */
+  font-size: 18px; /* Taille de police augmentée pour le paragraphe */
+  color: #212529; /* Couleur sombre pour le paragraphe */
+  line-height: 2; /* Espacement des lignes pour une meilleure lisibilité */
+  margin-left: 40px;
 }
 
 td, th {
@@ -62,4 +74,30 @@ td, th {
 
 li.strikethrough {
   text-decoration: line-through;
+}
+.title {
+  font-size: 24px; /* Taille de la police */
+  font-family: Arial, sans-serif; /* Police de caractères */
+  color: #333; /* Couleur du texte */
+  text-align: center; /* Alignement du texte */
+  background-color: #F2F2F2; /* Couleur de fond */
+  padding: 10px; /* Espace intérieur du titre */
+  border: 2px solid #666; /* Bordure */
+  border-radius: 10px; /* Coins arrondis */
+}
+.submitZebre {
+  background-color: #79aa79; /* Couleur de fond */
+  color: white; /* Couleur du texte */
+  padding: 15px 32px; /* Padding */
+  text-align: center; /* Alignement du texte */
+  text-decoration: none; /* Pas de soulignement */
+  display: inline-block; /* Type d'affichage */
+  font-size: 16px; /* Taille de la police */
+  margin: 4px 2px; /* Marge autour du bouton */
+  cursor: pointer; /* Curseur en forme de main */
+  border: none; /* Pas de bordure */
+  border-radius: 5px; /* Bordures arrondies */
+  position: fixed;
+  left: 40%;
+
 }

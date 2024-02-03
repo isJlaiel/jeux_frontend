@@ -4,24 +4,24 @@ import PersonalizedCell from '../compenents/PersonalizedCell';
 
 
 
-function LogicPuzzle({ mainCols, cols, rows, mainRows, clues, intro, puzzleType ,puzzleName,data }) {
+function LogicPuzzle({ mainCols, cols, rows, mainRows, clues, intro, puzzleType, puzzleName }) {
 
-  const initializeGrid = (name, sizeGrid) => Array.from({ length: sizeGrid }, (ele, index) => {
+  const initializeGrid = (name, value, sizeGrid) => Array.from({ length: sizeGrid }, (ele, index) => {
     let type;
     if (index <= 4) {
-      type = mainRows[0];
+      type = mainCols[0];
     } else if (index >= 5 && index <= 9) {
-      type = mainRows[1];
+      type = mainCols[1];
     } else {
-      type = mainRows[2];
+      type = mainCols[2];
     }
-    return { typeRow: name, status: null, typeCol: type, isAble: true, valueCol: cols[index], changedBy: [] }
+    return { typeRow: name, valueRow: value, status: null, typeCol: type, isAble: true, valueCol: cols[index], changedBy: [] }
   });
 
   const initializeGrids = () => {
     const grids = [];
     for (let i = 0; i < rows.length; i++) {
-      let type, count;
+      let type, count, valueRow;
       if (i < 5) {
         type = mainRows[0];
         count = 15;
@@ -32,7 +32,9 @@ function LogicPuzzle({ mainCols, cols, rows, mainRows, clues, intro, puzzleType 
         type = mainRows[2];
         count = 5;
       }
-      grids.push({ id: `grid${i}`, name: rows[i], items: initializeGrid(type, count) });
+      valueRow = rows[i];
+
+      grids.push({ id: `grid${i}`, name: rows[i], items: initializeGrid(type, valueRow, count) });
     }
     return grids;
   };
@@ -78,11 +80,39 @@ function LogicPuzzle({ mainCols, cols, rows, mainRows, clues, intro, puzzleType 
 
 
   const handleClick = () => {
+    const _data = [];
     grids.forEach((ele) => {
-      const greenItems = ele.items.filter(e => e.status === "green");
-      greenItems.forEach(e => console.log(e.valueCol + " " + ele.name + " "));
+      const greenItems = ele.items.filter(e => (e.status === "green" && e.typeRow == mainRows[0]));
+      greenItems.forEach(e => {
+        // Recherche si un objet avec les mêmes clés existe déjà dans _data
+        let found = false;
+        for (let obj of _data) {
+          if ((obj.hasOwnProperty(e.typeRow)) && (obj[e.typeRow] == e.valueRow) || (obj.hasOwnProperty(e.typeCol) && obj[e.typeCol] == e.valueCol)) {
+            // Si trouvé, mettre à jour cet objet (selon votre besoin, vous pouvez ajouter ou remplacer des valeurs)
+            found = true;
+            obj[e.typeRow] = e.valueRow; // Mettre à jour ou ajouter la valeur pour e.typeRow
+            obj[e.typeCol] = e.valueCol; // Mettre à jour ou ajouter la valeur pour e.typeCol
+            break;
+          }
+
+        }
+
+        // Si aucun objet correspondant n'est trouvé, créer un nouvel objet et l'ajouter à _data
+        if (!found) {
+          const newObj = {
+            [e.typeRow]: e.valueRow,
+            [e.typeCol]: e.valueCol
+          };
+          _data.push(newObj);
+
+        }
+
+      });
     });
+    console.log(_data);
+
   };
+
 
 
   useEffect(() => {
@@ -126,67 +156,74 @@ function LogicPuzzle({ mainCols, cols, rows, mainRows, clues, intro, puzzleType 
     }));
   }, [cellChecked]);
   return (
-    <div  >
-      <div >
-      <h1>{puzzleName}<small>{puzzleType}</small>
-      </h1>
-      <p>{intro}</p>
+    <div>
+       <div className='title' >
+            <h1>{puzzleName}<small>{puzzleType}</small>
+            </h1>
+            <p>{intro}</p>
 
+          </div>
+      <div className='container' >
+
+        <table className='table'>
+          {/* Header Rows */}
+          <thead>
+            <tr>
+              <th colSpan={2} rowSpan={2}></th>
+
+              <th className="headerCell" colSpan={5}>{mainCols[0]}</th>
+              <th className="headerCell" colSpan={5}>{mainCols[1]}</th>
+              <th className="headerCell" colSpan={5}>{mainCols[2]}</th>
+            </tr>
+            <tr>
+              {cols.map(col => (<th className="vertical-header">{col}</th>))}
+            </tr>
+          </thead>
+          <tbody>
+            <>
+              {rows.map((value, index) => (
+                <tr key={index}>
+                  {
+                    (index === 0 || index === 5 || index === 10) ?
+                      <td className="rowSpanCell" rowSpan={5}>
+                        {index === 0 ? mainRows[0] : (index === 5 ? mainRows[1] : mainRows[2])}
+                      </td> : null
+                  }
+                  <td className="headerRowSpan">
+
+                    {value}</td>
+                  {grids[index].items.map((cell, colIdx) => (
+                    <PersonalizedCell
+                      key={colIdx}
+                      status={cell.status}
+                      toggleStatus={() => toggleCellStatus(grids[index].id, colIdx)}
+                      isAble={cell.changedBy.filter((item) => item != -1).length == 0}
+                    />
+                  ))}
+                </tr>
+              ))}
+            </>
+
+          </tbody>
+        </table>
+        <div>
+         
+        </div>
+        <div className='clues'>
+          {clues.map((value, index) => (
+            <li
+              key={index}
+              className={clickedItems[index] ? 'strikethrough' : ''}
+              onClick={() => toggleItem(index)}>{value}</li>))
+          }
+             <div className="conteneur-bouton">
+
+<button className="submit" onClick={handleClick}>Check Answer</button>
+</div>
+        </div>
+        
       </div>
-      <div className='clues'>
-        {clues.map((value, index) => (
-          <li
-            key={index}
-            className={clickedItems[index] ? 'strikethrough' : ''}
-            onClick={() => toggleItem(index)}>{value}</li>))
-        }
-      </div>
-      <table className='table'>
-        {/* Header Rows */}
-        <thead>
-          <tr>
-            <th className="headerCell" colSpan={2} rowSpan={2}></th>
-
-            <th className="headerCell" colSpan={5}>{mainCols[0]}</th>
-            <th className="headerCell" colSpan={5}>{mainCols[1]}</th>
-            <th className="headerCell" colSpan={5}>{mainCols[2]}</th>
-          </tr>
-          <tr>
-            {cols.map(col => (<th className="vertical-header">{col}</th>))}
-          </tr>
-        </thead>
-        <tbody>
-          <>
-            {rows.map((value, index) => (
-              <tr key={index}>
-                {
-                  (index === 0 || index === 5 || index === 10) ?
-                    <td className="rowSpanCell" rowSpan={5}>
-                      {index === 0 ? mainRows[0] : (index === 5 ? mainRows[2] : mainRows[1])}
-                    </td> : null
-                }
-                <td className="headerRowSpan">
-
-                  {value}</td>
-                {grids[index].items.map((cell, colIdx) => (
-                  <PersonalizedCell
-                    key={colIdx}
-                    status={cell.status}
-                    toggleStatus={() => toggleCellStatus(grids[index].id, colIdx)}
-                    isAble={cell.changedBy.filter((item) => item != -1).length == 0}
-                  />
-                ))}
-              </tr>
-            ))}
-          </>
-
-        </tbody>
-      </table>
-      <div className="conteneur-bouton">
-
-      <button id="btn" className="submit" onClick={handleClick}>Test</button>
-      <button id="btn" className="submit" onClick={handleClick}>Submit</button>
-      </div>
+   
     </div >
   );
 }

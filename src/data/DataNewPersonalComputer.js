@@ -19,8 +19,8 @@ const clues = [
 
 const mainRows = ["Monitor", "Price ", "Hard Disk"]
 
-const puzzleType = "A New Personal Computer"
-const puzzleName = "  Logic Puzzle"
+const puzzleName = "A New Personal Computer"
+const puzzleType = "  Logic Puzzle"
 const intro = "Andrew has just bought one of these five different models of computers. Each computer has a different screen size, processor power, hard drive capacity and price. With the help of the clues, could you figure out which computer has been chosen by Andrew?";
 
 export {mainCols ,mainRows ,cols, rows , clues , puzzleType , puzzleName ,intro}

@@ -7,8 +7,9 @@ const cols = [
 ]
 const rows = [
   "Jessica", "Laurie", "Mark", "Mary", "Sally",
+  "7:35 pm", "7:40 pm", "8:20 pm", "8:30 pm", "8:45 pm",
   "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
-  "7:35 pm", "7:40 pm", "8:20 pm", "8:30 pm", "8:45 pm"
+
 ]
 
 const clues =[

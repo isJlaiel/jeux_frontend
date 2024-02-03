@@ -1,32 +1,109 @@
-.home {
-    text-align: center;
-    padding: 20px;
+/* Amélioration de la mise en page générale */
+.home-page {
+  text-align: center;
+  padding: 40px;
+  color: #333;
+  /* Couleur de texte standardisée */
 }
 
-.nav {
-    background-color: #f0f0f0;
-    padding: 10px 0;
+/* Entête et titre principaux */
+.header .main-title {
+  font-size: 3em;
+  /* Légèrement réduit pour l'harmonie */
+  margin-bottom: 0.5em;
+  /* Moins d'espacement en dessous */
+  color: #626366;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  /* Réduit pour moins d'espacement autour */
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
 }
 
-.navList {
-    list-style: none;
-    padding: 0;
-    margin: 0 auto; /* Centrer la liste dans le nav */
-    width: max-content; /* S'assurer que la largeur de la liste correspond à son contenu */
+/* Sous-titre */
+.header .main-subtitle {
+  color: #555;
+  font-size: 2em;
+  /* Taille réduite pour compactage */
+  font-weight: lighter;
 }
 
-.navItem {
-    display: block; /* Afficher chaque élément de la liste sur sa propre ligne */
-    margin: 10px 0; /* Ajouter un peu d'espace entre les éléments */
+/* Section de contenu */
+.content-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 20px;
+  /* Moins d'espacement */
+  gap: 10px;
+  /* Réduit l'espacement entre les blocs */
+}
+
+/* Bloc de contenu */
+.content-block {
+  flex: 0 1 28%;
+  /* Légère réduction pour compacité */
+  padding: 15px;
+  /* Padding réduit pour moins d'espacement */
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.content-block .icon {
+  background-color: #3498db;
+  width: 50px;
+  /* Taille réduite */
+  height: 50px;
+  /* Taille réduite */
+  border-radius: 25px;
+  /* Ajustement pour garder l'aspect rond */
+  margin-bottom: 15px;
+  /* Moins d'espacement en dessous */
+}
+
+.block-title {
+  margin: 10px 0;
+  /* Espacement réduit */
+  font-size: 1.2em;
+  /* Taille légèrement réduite */
+}
+
+.block-text {
+  margin-bottom: 15px;
+  line-height: 3;
+  margin-bottom: 60px;
+
+  /* Réduit l'espacement en dessous */
+
+}
+
+/* Bouton d'action */
+.call-to-action {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 1em;
+  /* Taille standardisée pour compacité */
+  transition: background-color 0.3s ease;
+}
+
+.call-to-action:hover {
+  background-color: #2874a6;
 }
 
 .navLink {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-    transition: color 0.3s ease;
+  color: #000000;
+  font-size: large;
+  transition: color 0.3s ease;
+
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .navLink:hover {
-    color: #007bff;
+  color: #3498db;
 }
