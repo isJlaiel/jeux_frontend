@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/ZebrePuzzle.css'
 import '../styles/TextStyles.css'
 import { clues, intro, womenCount, valuesAge, valuesName, valuesSurname, valuesPasta, valuesWine, cols, valuesShirt } from "../data/DataZebre"
@@ -17,8 +17,8 @@ function ZebrePuzzle() {
       Age: '',
     }))
   );
-  const [message, setMessage] = useState("");
 
+  const [message, setMessage] = useState("");
   const [clickedItems, setClickedItems] = useState([]);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [activateAnswerButton, setActivateAnswerButton] = useState(false);
@@ -30,7 +30,6 @@ function ZebrePuzzle() {
     }));
   };
   const handleSelectionChange = (womanId, field, value) => {
-    console.log(field)
     const updatedWomans = womans.map(woman => {
       if (woman.id === womanId) {
         return { ...woman, [field]: value };
@@ -38,7 +37,6 @@ function ZebrePuzzle() {
       return woman;
     });
     setWomans(updatedWomans);
-    activateButton();
   };
 
   const getValueOptions = (col) => {
@@ -95,10 +93,13 @@ function ZebrePuzzle() {
 
     const newWomans = womans.filter(e => e.Age !== "" && e.Name !== "" && e.Pasta !== "" && e.Shirt !== "" && e.Wine !== "");
     const newWomansProp = womans.filter(e => e.Age !== "" || e.Name !== "" || e.Pasta !== "" || e.Shirt !== "" || e.Wine !== "");
-
     setActivatePropButton(newWomansProp.length > 0 && newWomansProp.length < 5 )
     setActivateAnswerButton(newWomans.length == 5)
   }
+
+  useEffect(()=>{
+    activateButton()
+  },[womans])
   return (
     <div >
 
