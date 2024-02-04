@@ -44,7 +44,6 @@ function LogicPuzzle({ mainCols, cols, rows, mainRows, clues, intro, puzzleType,
   const [clickedItems, setClickedItems] = useState([]);
   const [activateAnswerButton, setActivateAnswerButton] = useState(false);
   const [activatePropButton, setActivatePropButton] = useState(true);
-  const [count, setCount]= useState(0)
   const toggleItem = (index) => {
     setClickedItems(prev => ({
       ...prev,

@@ -3,6 +3,7 @@ import '../styles/ZebrePuzzle.css'
 import '../styles/TextStyles.css'
 import { clues, intro, womenCount, valuesAge, valuesName, valuesSurname, valuesPasta, valuesWine, cols, valuesShirt } from "../data/DataZebre"
 import axios from 'axios';
+import AlertDialog from '../compenents/AlertDialog';
 
 function ZebrePuzzle() {
   const [womans, setWomans] = useState(
@@ -16,9 +17,12 @@ function ZebrePuzzle() {
       Age: '',
     }))
   );
+  const [message, setMessage] = useState("");
 
   const [clickedItems, setClickedItems] = useState([]);
-
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
+  const [activateAnswerButton, setActivateAnswerButton] = useState(false);
+  const [activatePropButton, setActivatePropButton] = useState(false);
   const toggleItem = (index) => {
     setClickedItems(prev => ({
       ...prev,
@@ -26,6 +30,7 @@ function ZebrePuzzle() {
     }));
   };
   const handleSelectionChange = (womanId, field, value) => {
+    console.log(field)
     const updatedWomans = womans.map(woman => {
       if (woman.id === womanId) {
         return { ...woman, [field]: value };
@@ -33,6 +38,7 @@ function ZebrePuzzle() {
       return woman;
     });
     setWomans(updatedWomans);
+    activateButton();
   };
 
   const getValueOptions = (col) => {
@@ -46,48 +52,68 @@ function ZebrePuzzle() {
       default: return [];
     }
   };
-  const handleClick = () => {
+  const handleClick = (arg) => {
     const data = ""
     const womansCopy = womans.map(({ id, ...rest }) => rest);
-    womansCopy.forEach(w=>{
-      delete w.id ;
+    womansCopy.forEach(w => {
+      delete w.id;
     })
-   let dataStr = JSON.stringify(womansCopy.filter((w)=> w.Name != "" && w.Age!=""&& w.Wine && w.Pasta && w.Shirt && w.Surname != ""));
+    let dataStr = JSON.stringify(womansCopy.filter((w) => w.Name != "" && w.Age != "" && w.Wine && w.Pasta && w.Shirt && w.Surname != ""));
 
     dataStr = dataStr.trim().slice(1, -1).replace(/},{/g, "}|{");
     console.log(dataStr);
-  
-    axios.get(`http://localhost:8000/modelresolver/testsol/3/${dataStr}`)
-    .then(function (response) {
-      // handle success
-      console.log(response.data);
-      if (response.data){
-        
-      }
-    })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    })
-    .then(function () {
-      // always executed
-    });
+
+    axios.get(`http://localhost:8000/modelresolver/${arg}/3/${dataStr}`)
+      .then(function (response) {
+        // handle success
+        console.log(response.data);
+        if (response.data === "True") {
+          let m = arg === "testsol" ? "GG YOUR PARTIAL ANSWER IS CORRECT 🥳🥳🥳🥳🥳🥳🥳🥳🥳" : "GG your answer is correct 🥳🥳🥳🥳🥳🥳🥳🥳🥳";
+          setMessage(m)
+          setIsAlertOpen(true);
+        } else {
+          let m = arg === "testsol" ? "Check your partial answer because there is something wrong 😭😭😭😭😭😭😭" : "Check your  answer because there is something wrong 😭😭😭😭😭😭😭";
+
+          setMessage(m)
+
+          setIsAlertOpen(true);
+        }
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
   };
+
+  const handleClose = () => {
+    setIsAlertOpen(false);
+  };
+  const activateButton = () => {
+
+    const newWomans = womans.filter(e => e.Age !== "" && e.Name !== "" && e.Pasta !== "" && e.Shirt !== "" && e.Wine !== "");
+    const newWomansProp = womans.filter(e => e.Age !== "" || e.Name !== "" || e.Pasta !== "" || e.Shirt !== "" || e.Wine !== "");
+
+    setActivatePropButton(newWomansProp.length > 0 && newWomansProp.length < 5 )
+    setActivateAnswerButton(newWomans.length == 5)
+  }
   return (
     <div >
 
-    <div className='title' >
-      <h1>Pasta and Wine<small> Zebra Puzzle</small>
-      </h1>
-      <p>{intro}</p>
-      <div className='grid-container'>
-        {clues.map((value, index) => (
-          <li
-            key={index}
-            className={clickedItems[index] ? 'strikethrough' : ''}
-            onClick={() => toggleItem(index)}>{value}</li>
-        ))}
-      </div>
+      <div className='title' >
+        <h1>Pasta and Wine<small> Zebra Puzzle</small>
+        </h1>
+        <p>{intro}</p>
+        <div className='grid-container'>
+          {clues.map((value, index) => (
+            <li
+              key={index}
+              className={clickedItems[index] ? 'strikethrough' : ''}
+              onClick={() => toggleItem(index)}>{value}</li>
+          ))}
+        </div>
       </div>
       <div className="tableContainer">
         <table className='tableZebre'>
@@ -122,8 +148,16 @@ function ZebrePuzzle() {
           </tbody>
         </table>
       </div>
-      <button className="submitZebre" onClick={handleClick}>Check Answer</button>
+      <div className="conteneur-bouton">
 
+      <button disabled={!activatePropButton} className="submitZebre" onClick={() => handleClick("testsol")} >Check proposition</button>
+      <button disabled={!activateAnswerButton} className="submitZebre" onClick={() => handleClick("solve")}>Check Answer</button>
+</div>
+
+      <div>
+        <AlertDialog isOpen={isAlertOpen} onClose={handleClose} message={message} />
+
+      </div>
     </div>
 
   );

@@ -16,4 +16,9 @@
     padding: 10px;
     min-height: 150px;
   }
-  
+  .deleteButton {
+    margin-left: '10000px';
+    cursor: 'pointer';
+    color: 'red';
+    font-weight: 'bold';
+  }

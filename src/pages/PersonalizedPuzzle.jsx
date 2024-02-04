@@ -1,49 +1,62 @@
 import React, { useState } from 'react';
 import '../styles/PersonnalizedPuzzle.css'
 function PersonalizedPuzzle() {
-  const [personnes, setPersonnes] = useState([]);
-  const [objects, setObjets] = useState([]);
-  const [places, setPlaces] = useState([]);
-  const [constraint, setConstraint] = useState('');
+  const [names, setNames] = useState([]);
   const [constraints, setConstraints] = useState([]);
+  const [constraint, setConstraint] = useState("");
 
   const handleAddElement = () => {
     setConstraints([...constraints, constraint]);
-    setConstraint('');
+    setConstraint("");
+  };
+  const handleAddName = (e) => {
+    e.preventDefault(); 
+    const newName = e.target.value; 
+    if (newName.trim() !== "") {
+      setNames([...names, newName]); 
+      e.target.value = "";
+    }
+  };
+
+  const handleRemoveName = (indexToRemove) => {
+    setNames(names.filter((_, index) => index !== indexToRemove));
   };
 
   return (
     <div>
+      <p>paragraphe 1</p>
+      <div>
       <input
         className='persoInput'
         type="text"
-        placeholder="Personne"
-        value={personnes}
-        onChange={e => setPersonnes([...personnes, e.target.value])}
+        placeholder="Name"
+        onKeyPress={e => e.key === 'Enter' && handleAddName(e)}
       />
-      <input
-        className='persoInput'
-        type="text"
-        placeholder="Objet"
-        value={objects}
-        onChange={e => setObjets([...objects, e.target.value])}
-      />
-      <input
-        className='persoInput'
-        type="text"
-        placeholder="Lien"
-        value={place}
-        onChange={e => setLien(e.target.value)}
-      />
+      <ul>
+        {names.map((name, index) => (
+          <li key={index}>
+            {name} 
+            <span 
+              onClick={() => handleRemoveName(index)}
+              className="deleteButton"
+            >
+              X
+            </span>
+            
+           </li>
+        ))}
+      </ul>
+    </div>
+    
       <textarea
         className='persotextarea'
         placeholder="Input"
-        onChange={e => setInput(e.target.value)}
+        onChange={e => setConstraint([...constraint, e.target.value])}
       />
       <button onClick={handleAddElement}>Add Element</button>
       <div className="box">
-        {elements.map((element, index) => (
-          <div key={index}>{element}</div>
+        {constraints.map((c, index) => (
+          <div key={index}>{c}</div>
         ))}
       </div>
     </div>
