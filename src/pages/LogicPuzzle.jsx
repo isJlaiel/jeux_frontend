@@ -90,8 +90,8 @@ function LogicPuzzle({ mainCols, cols, rows, mainRows, clues, intro, puzzleType,
           if ((obj.hasOwnProperty(e.typeRow)) && (obj[e.typeRow] == e.valueRow) || (obj.hasOwnProperty(e.typeCol) && obj[e.typeCol] == e.valueCol)) {
 
             found = true;
-            obj[e.typeRow] = e.valueRow; // Mettre à jour ou ajouter la valeur pour e.typeRow
-            obj[e.typeCol] = e.valueCol; // Mettre à jour ou ajouter la valeur pour e.typeCol
+            obj[e.typeRow.replace(/\s/g, '')] = e.valueRow; // Mettre à jour ou ajouter la valeur pour e.typeRow
+            obj[e.typeCol.replace(/\s/g, '')] = e.valueCol; // Mettre à jour ou ajouter la valeur pour e.typeCol
             break;
           }
 
@@ -99,8 +99,8 @@ function LogicPuzzle({ mainCols, cols, rows, mainRows, clues, intro, puzzleType,
 
         if (!found) {
           const newObj = {
-            [e.typeRow.replace(/\s/g, '')]: e.valueRow.replace(/'/g, ""),
-            [e.typeCol.replace(/\s/g, '')]: e.valueCol.replace(/'/g, "")
+            [e.typeRow.replace(/\s/g, '')]: e.valueRow,
+            [e.typeCol.replace(/\s/g, '')]: e.valueCol,
           };
               console.log(newObj)
           _data.push(newObj);
@@ -111,7 +111,7 @@ function LogicPuzzle({ mainCols, cols, rows, mainRows, clues, intro, puzzleType,
     });
     let dataStr = JSON.stringify(_data);
     dataStr = dataStr.trim().slice(1, -1).replace(/},{/g, "}|{");
-    // console.log(dataStr);
+     console.log(dataStr);
 
     axios.get(`http://localhost:8000/modelresolver/${arg}/${idGameValue}/${dataStr}`)
       .then(function (response) {
