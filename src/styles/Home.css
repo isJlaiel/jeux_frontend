@@ -41,16 +41,15 @@
   /* Réduit l'espacement entre les blocs */
 }
 
-/* Bloc de contenu */
 .content-block {
-  flex: 0 1 28%;
-  /* Légère réduction pour compacité */
+  flex: 0 1 22%; /* Ajustez cette valeur pour laisser de l'espace pour les marges */
   padding: 15px;
-  /* Padding réduit pour moins d'espacement */
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  margin: 10px; /* Ajustez selon le besoin pour l'espacement entre les blocs */
 }
+
 
 .content-block .icon {
   background-color: #3498db;

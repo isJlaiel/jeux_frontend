@@ -90,8 +90,8 @@ function LogicPuzzle({ mainCols, cols, rows, mainRows, clues, intro, puzzleType,
           if ((obj.hasOwnProperty(e.typeRow)) && (obj[e.typeRow] == e.valueRow) || (obj.hasOwnProperty(e.typeCol) && obj[e.typeCol] == e.valueCol)) {
 
             found = true;
-            obj[e.typeRow.replace(/\s/g, '')] = e.valueRow; // Mettre à jour ou ajouter la valeur pour e.typeRow
-            obj[e.typeCol.replace(/\s/g, '')] = e.valueCol; // Mettre à jour ou ajouter la valeur pour e.typeCol
+            obj[e.typeRow] = e.valueRow; // Mettre à jour ou ajouter la valeur pour e.typeRow
+            obj[e.typeCol] = e.valueCol; // Mettre à jour ou ajouter la valeur pour e.typeCol
             break;
           }
 
@@ -99,8 +99,8 @@ function LogicPuzzle({ mainCols, cols, rows, mainRows, clues, intro, puzzleType,
 
         if (!found) {
           const newObj = {
-            [e.typeRow.replace(/\s/g, '')]: e.valueRow,
-            [e.typeCol.replace(/\s/g, '')]: e.valueCol,
+            [e.typeRow]: e.valueRow,
+            [e.typeCol]: e.valueCol,
           };
               console.log(newObj)
           _data.push(newObj);
