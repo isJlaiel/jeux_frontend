@@ -1,5 +1,5 @@
 
-const mainCols = ["Processor", "Hard Disk", "Price"];
+const mainCols = ["Processor", "HardDisk", "Price"];
 const cols = [
   "2.0 MHz", "2.3 MHz", "2.5 MHz", "2.7 MHz", "3.1 MHz",
   "250 Gb", "320 Gb", "500 Gb", "750 Gb", "1024 Gb",
@@ -17,7 +17,7 @@ const clues = [
   "4. The computer that has the 27' screen doesn't have the 320 Gb hard drive. The 500 GB HD is included in the computer that has a more powerful processor and a larger size screen than the one which costs 699 euros (which doesn't include the 320 Gb HD)."
 ]
 
-const mainRows = ["Monitor", "Price ", "Hard Disk"]
+const mainRows = ["Monitor", "Price ", "HardDisk"]
 
 const puzzleName = "A New Personal Computer"
 const puzzleType = "  Logic Puzzle"
