@@ -116,6 +116,13 @@ li {
   border: none; /* Pas de bordure */
   border-radius: 5px; /* Bordures arrondies */
 }
+button.submit:disabled {
+  /* Ici, vous pouvez ajouter vos styles pour le bouton désactivé */
+  background-color: #ccc; /* Couleur de fond grise pour indiquer qu'il est désactivé */
+  color: #666; /* Couleur du texte plus sombre */
+  cursor: not-allowed; /* Change le curseur pour indiquer qu'il n'est pas cliquable */
+  border: 1px solid #999; /* Optionnel: change la bordure pour le bouton désactivé */
+}
 
 .conteneur-bouton {
   text-align: center; /* Centrer le bouton */

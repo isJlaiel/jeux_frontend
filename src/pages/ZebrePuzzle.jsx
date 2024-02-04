@@ -48,22 +48,22 @@ function ZebrePuzzle() {
   };
   const handleClick = () => {
     const data = ""
-    womans.forEach(w=>{
+    const womansCopy = womans.map(({ id, ...rest }) => rest);
+    womansCopy.forEach(w=>{
       delete w.id ;
     })
-   let dataStr = JSON.stringify(womans.filter((w)=> w.Name != "" && w.Age!=""&& w.Wine && w.Pasta && w.Shirt && w.Surname != ""));
+   let dataStr = JSON.stringify(womansCopy.filter((w)=> w.Name != "" && w.Age!=""&& w.Wine && w.Pasta && w.Shirt && w.Surname != ""));
 
-    dataStr = dataStr.trim().slice(1, -1).replace(/},{/g, "}|{")+"|";
+    dataStr = dataStr.trim().slice(1, -1).replace(/},{/g, "}|{");
     console.log(dataStr);
   
-    axios.get(`http://localhost:8000/modelresolver/solve/3/${dataStr}`, {
-      headers: {
-       
-      }
-    })
+    axios.get(`http://localhost:8000/modelresolver/testsol/3/${dataStr}`)
     .then(function (response) {
       // handle success
       console.log(response.data);
+      if (response.data){
+        
+      }
     })
     .catch(function (error) {
       // handle error

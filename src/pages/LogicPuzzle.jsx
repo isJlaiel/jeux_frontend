@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/logicPuzzle.css';
 import PersonalizedCell from '../compenents/PersonalizedCell';
-
+import AlertDialog from '../compenents/AlertDialog';
 import axios from 'axios';
-function LogicPuzzle({ mainCols, cols, rows, mainRows, clues, intro, puzzleType, puzzleName , idGame}) {
+function LogicPuzzle({ mainCols, cols, rows, mainRows, clues, intro, puzzleType, puzzleName, idGame }) {
   const idGameValue = idGame ? idGame : 0;
   const initializeGrid = (name, value, sizeGrid) => Array.from({ length: sizeGrid }, (ele, index) => {
     let type;
@@ -38,12 +38,13 @@ function LogicPuzzle({ mainCols, cols, rows, mainRows, clues, intro, puzzleType,
     return grids;
   };
   const [grids, setGrids] = useState(initializeGrids());
-
-
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
+  const [message, setMessage] = useState("");
   const [cellChecked, setCellChecked] = useState({ _typeRow: "", _typeCol: "", _gridId: "", _index: "", _isAble: "" })
-
   const [clickedItems, setClickedItems] = useState([]);
-
+  const [activateAnswerButton, setActivateAnswerButton] = useState(false);
+  const [activatePropButton, setActivatePropButton] = useState(true);
+  const [count, setCount]= useState(0)
   const toggleItem = (index) => {
     setClickedItems(prev => ({
       ...prev,
@@ -78,16 +79,16 @@ function LogicPuzzle({ mainCols, cols, rows, mainRows, clues, intro, puzzleType,
   };
 
 
-  const handleClick = () => {
+  const handleClick = (arg) => {
     const _data = [];
     grids.forEach((ele) => {
       const greenItems = ele.items.filter(e => (e.status === "green" && e.typeRow == mainRows[0]));
       greenItems.forEach(e => {
-        // Recherche si un objet avec les mêmes clés existe déjà dans _data
         let found = false;
         for (let obj of _data) {
+
           if ((obj.hasOwnProperty(e.typeRow)) && (obj[e.typeRow] == e.valueRow) || (obj.hasOwnProperty(e.typeCol) && obj[e.typeCol] == e.valueCol)) {
-            // Si trouvé, mettre à jour cet objet (selon votre besoin, vous pouvez ajouter ou remplacer des valeurs)
+
             found = true;
             obj[e.typeRow] = e.valueRow; // Mettre à jour ou ajouter la valeur pour e.typeRow
             obj[e.typeCol] = e.valueCol; // Mettre à jour ou ajouter la valeur pour e.typeCol
@@ -96,12 +97,12 @@ function LogicPuzzle({ mainCols, cols, rows, mainRows, clues, intro, puzzleType,
 
         }
 
-        // Si aucun objet correspondant n'est trouvé, créer un nouvel objet et l'ajouter à _data
         if (!found) {
           const newObj = {
-            [e.typeRow]: e.valueRow,
-            [e.typeCol]: e.valueCol
+            [e.typeRow.replace(/\s/g, '')]: e.valueRow.replace(/'/g, ""),
+            [e.typeCol.replace(/\s/g, '')]: e.valueCol.replace(/'/g, "")
           };
+              console.log(newObj)
           _data.push(newObj);
 
         }
@@ -109,29 +110,53 @@ function LogicPuzzle({ mainCols, cols, rows, mainRows, clues, intro, puzzleType,
       });
     });
     let dataStr = JSON.stringify(_data);
-    dataStr = dataStr.trim().slice(1, -1).replace(/},{/g, "}|{")+"|";
-    console.log(dataStr);
+    dataStr = dataStr.trim().slice(1, -1).replace(/},{/g, "}|{");
+    // console.log(dataStr);
 
-    axios.get(`http://localhost:8000/modelresolver/solve/${idGameValue}/${dataStr}`, {
-      headers: {
-       
-      }
-    })
-    .then(function (response) {
-      // handle success
-      console.log(response.data);
-    })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    })
-    .then(function () {
-      // always executed
-    });
+    axios.get(`http://localhost:8000/modelresolver/${arg}/${idGameValue}/${dataStr}`)
+      .then(function (response) {
+        // handle success
+
+        if (response.data === "True") {
+          let m = arg==="testsol"? "GG YOUR PARTIAL ANSWER IS CORRECT 🥳🥳🥳🥳🥳🥳🥳🥳🥳" :"GG your answer is correct 🥳🥳🥳🥳🥳🥳🥳🥳🥳";
+          setMessage(m)
+          setIsAlertOpen(true);
+        } else {
+          let m = arg==="testsol"? "Check your partial answer because there is something wrong 😭😭😭😭😭😭😭" :"Check your  answer because there is something wrong 😭😭😭😭😭😭😭";
+
+          setMessage(m)
+
+          setIsAlertOpen(true);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+
   };
 
+  const handleClose = () => {
+    setIsAlertOpen(false);
+  };
+  const activateButton = () => {
 
-
+    const newGrids = grids.map((ele) => {
+      // Filtrer les items pour ne garder que ceux avec un status "green"
+      const filteredItems = ele.items.filter(e => e.status === "green");
+      
+      // Retourner un nouvel objet avec les items filtrés
+      return {
+        ...ele,
+        items: filteredItems
+      };
+    });
+    var count = 0 ;
+    newGrids.forEach(ele => {
+      count += ele.items.length;
+    });
+    setActivatePropButton(count  < 15 && count> 0)
+    setActivateAnswerButton(count === 15)
+  }
   useEffect(() => {
     setGrids(current => current.map(grid => {
       if (grid.id === cellChecked._gridId) {
@@ -171,15 +196,18 @@ function LogicPuzzle({ mainCols, cols, rows, mainRows, clues, intro, puzzleType,
       }
       return grid;
     }));
+    activateButton();
   }, [cellChecked]);
+
+
   return (
     <div>
-       <div className='title' >
-            <h1>{puzzleName}<small>{puzzleType}</small>
-            </h1>
-            <p>{intro}</p>
+      <div className='title' >
+        <h1>{puzzleName}<small>{puzzleType}</small>
+        </h1>
+        <p>{intro}</p>
 
-          </div>
+      </div>
       <div className='container' >
 
         <table className='table'>
@@ -224,7 +252,7 @@ function LogicPuzzle({ mainCols, cols, rows, mainRows, clues, intro, puzzleType,
           </tbody>
         </table>
         <div>
-         
+
         </div>
         <div className='clues'>
           {clues.map((value, index) => (
@@ -233,14 +261,17 @@ function LogicPuzzle({ mainCols, cols, rows, mainRows, clues, intro, puzzleType,
               className={clickedItems[index] ? 'strikethrough' : ''}
               onClick={() => toggleItem(index)}>{value}</li>))
           }
-             <div className="conteneur-bouton">
+          <div className="conteneur-bouton">
+          <button  disabled={!activatePropButton} className="submit" onClick={()=>handleClick("testsol")} >Check proposition</button>
 
-<button className="submit" onClick={handleClick}>Check Answer</button>
-</div>
+            <button disabled={!activateAnswerButton} className="submit" onClick={()=>handleClick("solve")}>Check Answer</button>
+
+          </div>
         </div>
-        
+        <AlertDialog isOpen={isAlertOpen} onClose={handleClose} message={message} />
+
       </div>
-   
+
     </div >
   );
 }

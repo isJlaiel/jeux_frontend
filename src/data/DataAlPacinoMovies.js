@@ -1,7 +1,7 @@
 
 const mainCols = ["Film", "Day", "Time"];
 const cols = [
-  "Minutes88", "DonnieBrasco","Scarecrow", "Scarface", "TheRecruit",
+  "Minutes88", "Donnie Brasco","Scarecrow", "Scarface", "The Recruit",
   "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
   "7:35 pm", "7:40 pm", "8:20 pm", "8:30 pm", "8:45 pm"
 ]
