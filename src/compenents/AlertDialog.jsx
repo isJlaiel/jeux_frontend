@@ -11,22 +11,22 @@ const AlertDialog = ({ isOpen, onClose, message }) => {
       backgroundColor: 'white',
       padding: '20px',
       zIndex: 100,
-      boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)', // Ajout d'une ombre portée
-      borderRadius: '10px', // Bords arrondis
+      boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)', 
+      borderRadius: '10px', 
     }}>
       <p style={{
-        color: '#333', // Couleur du texte
-        fontSize: '25px', // Taille du texte
+        color: '#333', 
+        fontSize: '25px', 
         fontWeight : 'bold' ,
       }}>{message}</p>
       <button onClick={onClose} style={{
-        backgroundColor: 'green', // Couleur de fond du bouton
-        color: 'white', // Couleur du texte du bouton
-        border: 'none', // Suppression de la bordure du bouton
-        padding: '10px 20px', // Ajustement du padding du bouton
-        borderRadius: '5px', // Bords arrondis du bouton
-        cursor: 'pointer', // Changement du curseur au survol
-        fontSize: '16px', // Taille du texte du bouton
+        backgroundColor: 'green', 
+        color: 'white', 
+        border: 'none', 
+        padding: '10px 20px', 
+        borderRadius: '5px', 
+        cursor: 'pointer', 
+        fontSize: '16px', 
       }}>Close</button>
     </div>
   );

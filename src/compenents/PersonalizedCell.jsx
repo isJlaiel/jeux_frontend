@@ -14,16 +14,15 @@ const PersonalizedCell = ({ status, toggleStatus, children, isAble }) => {
      if (isAble) { 
       toggleStatus();
     }
-    // Si `able` est false, rien ne se passe lors du clic
   };
 
   return (
     <td
-      onClick={handleClick} // Utilisez handleClick ici
+      onClick={handleClick}
       style={{
         border: '1px solid black',
         textAlign: 'center',
-        cursor: isAble  ? 'pointer' : 'not-allowed', // Change le curseur en fonction de `able`
+        cursor: isAble  ? 'pointer' : 'not-allowed',
 
         backgroundColor: getBackgroundColor(),
         color: getColor(),

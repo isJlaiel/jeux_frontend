@@ -89,8 +89,8 @@ function LogicPuzzle({ mainCols, cols, rows, mainRows, clues, intro, puzzleType,
           if ((obj.hasOwnProperty(e.typeRow)) && (obj[e.typeRow] == e.valueRow) || (obj.hasOwnProperty(e.typeCol) && obj[e.typeCol] == e.valueCol)) {
 
             found = true;
-            obj[e.typeRow] = e.valueRow; // Mettre à jour ou ajouter la valeur pour e.typeRow
-            obj[e.typeCol] = e.valueCol; // Mettre à jour ou ajouter la valeur pour e.typeCol
+            obj[e.typeRow] = e.valueRow; 
+            obj[e.typeCol] = e.valueCol;
             break;
           }
 
@@ -140,10 +140,10 @@ function LogicPuzzle({ mainCols, cols, rows, mainRows, clues, intro, puzzleType,
   const activateButton = () => {
 
     const newGrids = grids.map((ele) => {
-      // Filtrer les items pour ne garder que ceux avec un status "green"
+
       const filteredItems = ele.items.filter(e => e.status === "green");
       
-      // Retourner un nouvel objet avec les items filtrés
+      
       return {
         ...ele,
         items: filteredItems
@@ -210,7 +210,6 @@ function LogicPuzzle({ mainCols, cols, rows, mainRows, clues, intro, puzzleType,
       <div className='container' >
 
         <table className='table'>
-          {/* Header Rows */}
           <thead>
             <tr>
               <th colSpan={2} rowSpan={2}></th>

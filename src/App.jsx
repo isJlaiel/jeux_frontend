@@ -5,6 +5,7 @@ import AlPacinoMovies from './pages/AlPacinoMovies'
 import NewPersonalComputer from './pages/NewPersonalComputer'
 import Home from './pages/Home'
 import PersonalizedPuzzle from './pages/PersonalizedPuzzle'
+import FirstStepPersonalizedPuzzle from './pages/FirstStepPersonalizedPuzzle'
 function App() {
 
   return (
@@ -15,7 +16,7 @@ function App() {
       <Route path="/newPersonalComputer" element={<NewPersonalComputer/>}/>
       <Route path="/zebre" element={<ZebrePuzzle/>}/>
       <Route path="/personnalizedPuzzle" element={<PersonalizedPuzzle/>}/>
-
+      <Route path='/firstStepPersonalizedPuzzle' element={<FirstStepPersonalizedPuzzle/>}/>
     </Routes>
 
     </div>  )
