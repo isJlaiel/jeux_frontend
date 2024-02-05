@@ -18,16 +18,13 @@ function FirstStepPersonalizedPuzzle() {
         data = "enum PERSON = {" + data + "}"
         axios.get(`http://localhost:8000/modelresolver/sendVariable/${data}`)
             .then(function (response) {
-                // handle success
                 console.log(response.data);
 
             })
             .catch(function (error) {
-                // handle error
                 console.log(error);
             })
             .then(function () {
-                // always executed
             });
         navigate('/personnalizedPuzzle', { state: { people } }); 
     };

@@ -11,15 +11,15 @@
   font-size: 28px; 
   font-family: Arial, sans-serif; 
   color: #333; 
-  text-align: center; /* Alignement du texte */
-  background-color: #F2F2F2; /* Couleur de fond */
-  padding: 10px; /* Espace intérieur du titre */
-  border: 2px solid #666; /* Bordure */
-  border-radius: 10px; /* Coins arrondis */
+  text-align: center; 
+  background-color: #F2F2F2; 
+  padding: 10px; 
+  border: 2px solid #666;
+  border-radius: 10px;
 }
 .table td, .table th {
-  padding: 5px; /* Réduction du padding pour compacter les cellules */
-  font-size: 13px; /* Optionnel: réduire la taille de police pour économiser de l'espace */
+  padding: 5px; 
+  font-size: 13px; 
 }
 
 .cellRed {
@@ -38,7 +38,7 @@
 }
 
 .container {
-  display: flex; /* Utilise flexbox pour aligner les éléments côte à côte */
+  display: flex; 
 }
 
 .headerCell {
@@ -67,7 +67,6 @@
     border-radius: 8px;
   text-align: center;
   vertical-align: middle; 
-  /* padding: 15px;  */
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   white-space: nowrap; }
 
@@ -151,6 +150,6 @@ p {
   transform: rotate(180deg); 
   white-space: nowrap;
   border: 1px solid #6d6262;
-  writing-mode: vertical-lr; /* oriente le texte de haut en bas */
+  writing-mode: vertical-lr; 
   width: 25px; 
 }

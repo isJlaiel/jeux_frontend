@@ -63,7 +63,6 @@ function ZebrePuzzle() {
 
     axios.get(`http://localhost:8000/modelresolver/${arg}/3/${dataStr}`)
       .then(function (response) {
-        // handle success
         console.log(response.data);
         if (response.data === "True") {
           let m = arg === "testsol" ? "GG YOUR PARTIAL ANSWER IS CORRECT 🥳🥳🥳🥳🥳🥳🥳🥳🥳" : "GG your answer is correct 🥳🥳🥳🥳🥳🥳🥳🥳🥳";
@@ -78,11 +77,9 @@ function ZebrePuzzle() {
         }
       })
       .catch(function (error) {
-        // handle error
         console.log(error);
       })
       .then(function () {
-        // always executed
       });
   };
 
