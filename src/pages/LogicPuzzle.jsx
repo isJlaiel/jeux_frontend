@@ -89,7 +89,7 @@ function LogicPuzzle({ mainCols, cols, rows, mainRows, clues, intro, puzzleType,
           if ((obj.hasOwnProperty(e.typeRow)) && (obj[e.typeRow] == e.valueRow) || (obj.hasOwnProperty(e.typeCol) && obj[e.typeCol] == e.valueCol)) {
 
             found = true;
-            obj[e.typeRow] = e.valueRow; 
+            obj[e.typeRow] = e.valueRow;
             obj[e.typeCol] = e.valueCol;
             break;
           }
@@ -101,7 +101,7 @@ function LogicPuzzle({ mainCols, cols, rows, mainRows, clues, intro, puzzleType,
             [e.typeRow]: e.valueRow,
             [e.typeCol]: e.valueCol,
           };
-              console.log(newObj)
+          console.log(newObj)
           _data.push(newObj);
 
         }
@@ -110,18 +110,18 @@ function LogicPuzzle({ mainCols, cols, rows, mainRows, clues, intro, puzzleType,
     });
     let dataStr = JSON.stringify(_data);
     dataStr = dataStr.trim().slice(1, -1).replace(/},{/g, "}|{");
-     console.log(dataStr);
+    console.log(dataStr);
 
     axios.get(`http://localhost:8000/modelresolver/${arg}/${idGameValue}/${dataStr}`)
       .then(function (response) {
         // handle success
 
         if (response.data === "True") {
-          let m = arg==="testsol"? "GG YOUR PARTIAL ANSWER IS CORRECT 🥳🥳🥳🥳🥳🥳🥳🥳🥳" :"GG your answer is correct 🥳🥳🥳🥳🥳🥳🥳🥳🥳";
+          let m = arg === "testsol" ? "GG YOUR PARTIAL ANSWER IS CORRECT 🥳🥳🥳🥳🥳🥳🥳🥳🥳" : "GG your answer is correct 🥳🥳🥳🥳🥳🥳🥳🥳🥳";
           setMessage(m)
           setIsAlertOpen(true);
         } else {
-          let m = arg==="testsol"? "Check your partial answer because there is something wrong 😭😭😭😭😭😭😭" :"Check your  answer because there is something wrong 😭😭😭😭😭😭😭";
+          let m = arg === "testsol" ? "Check your partial answer because there is something wrong 😭😭😭😭😭😭😭" : "Check your  answer because there is something wrong 😭😭😭😭😭😭😭";
 
           setMessage(m)
 
@@ -142,18 +142,18 @@ function LogicPuzzle({ mainCols, cols, rows, mainRows, clues, intro, puzzleType,
     const newGrids = grids.map((ele) => {
 
       const filteredItems = ele.items.filter(e => e.status === "green");
-      
-      
+
+
       return {
         ...ele,
         items: filteredItems
       };
     });
-    var count = 0 ;
+    var count = 0;
     newGrids.forEach(ele => {
       count += ele.items.length;
     });
-    setActivatePropButton(count  < 15 && count> 0)
+    setActivatePropButton(count < 15 && count > 0)
     setActivateAnswerButton(count === 15)
   }
   useEffect(() => {
@@ -260,9 +260,9 @@ function LogicPuzzle({ mainCols, cols, rows, mainRows, clues, intro, puzzleType,
               onClick={() => toggleItem(index)}>{value}</li>))
           }
           <div className="conteneur-bouton">
-          <button  disabled={!activatePropButton} className="submit" onClick={()=>handleClick("testsol")} >Check proposition</button>
+            <button disabled={!activatePropButton} className="submit" onClick={() => handleClick("testsol")} >Check proposition</button>
 
-            <button disabled={!activateAnswerButton} className="submit" onClick={()=>handleClick("solve")}>Check Answer</button>
+            <button disabled={!activateAnswerButton} className="submit" onClick={() => handleClick("solve")}>Check Answer</button>
 
           </div>
         </div>
