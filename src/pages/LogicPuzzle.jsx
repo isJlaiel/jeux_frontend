@@ -140,10 +140,10 @@ function LogicPuzzle({ mainCols, cols, rows, mainRows, clues, intro, puzzleType,
   const activateButton = () => {
 
     const newGrids = grids.map((ele) => {
-      // Filtrer les items pour ne garder que ceux avec un status "green"
+
       const filteredItems = ele.items.filter(e => e.status === "green");
       
-      // Retourner un nouvel objet avec les items filtrés
+      
       return {
         ...ele,
         items: filteredItems

@@ -19,7 +19,7 @@ const PersonalizedCell = ({ status, toggleStatus, children, isAble }) => {
 
   return (
     <td
-      onClick={handleClick} // Utilisez handleClick ici
+      onClick={handleClick}
       style={{
         border: '1px solid black',
         textAlign: 'center',

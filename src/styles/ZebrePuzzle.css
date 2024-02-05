@@ -2,30 +2,30 @@
   margin-left: 200px;
   justify-content: center;
   align-items: center;
-  width: 100%; /* Réduction supplémentaire de la largeur pour un aspect plus compact */
+  width: 100%; 
   margin-bottom: 30px;
 }
 
 .title {
-  font-size: 28px; /* Taille de la police */
-  font-family: Arial, sans-serif; /* Police de caractères */
-  color: #333; /* Couleur du texte */
-  text-align: center; /* Alignement du texte */
-  background-color: #F2F2F2; /* Couleur de fond */
-  padding: 10px; /* Espace intérieur du titre */
-  border: 2px solid #666; /* Bordure */
-  border-radius: 10px; /* Coins arrondis */
+  font-size: 28px; 
+  font-family: Arial, sans-serif; 
+  color: #333; 
+  text-align: center; 
+  background-color: #F2F2F2; 
+  padding: 10px; 
+  border: 2px solid #666; 
+  border-radius: 10px; 
 }
 .tableZebre {
   margin-top: 80px;
-  width: 80%; /* Réduction supplémentaire de la largeur pour un aspect plus compact */
+  width: 80%; 
   border-collapse: collapse;
 }
 
 .col, .th {
   text-align: center;
-  padding: 4px; /* Réduction du padding pour diminuer l'espace */
-  font-size: 18px; /* Réduction de la taille du texte pour un aspect plus compact */
+  padding: 4px; 
+  font-size: 18px;
 }
 
 .th {
@@ -38,36 +38,36 @@ tr:nth-child(even) {
 }
 .selectTable {
   border: 1px solid #ccc;
-  padding: 2px; /* Réduction du padding */
+  padding: 2px; 
   background-color: white;
-  width: 50%; /* Réduction de la largeur pour un aspect plus compact */
+  width: 50%;
   margin: auto;
 }
 
 
 
 h1 {
-  font-size: 24px; /* Taille réduite pour le titre */
+  font-size: 24px; 
 }
 
 p, .clues {
-  font-size: 18px; /* Taille de police augmentée pour le paragraphe */
-  color: #212529; /* Couleur sombre pour le paragraphe */
-  line-height: 2; /* Espacement des lignes pour une meilleure lisibilité */
+  font-size: 18px; 
+  color: #212529; 
+  line-height: 2; 
   margin-left: 40px;
 }
 
 td, th {
-  font-size: 16px; /* Taille réduite pour le texte dans les cellules */
+  font-size: 16px; 
 }
 
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Crée deux colonnes de largeur égale */
-  gap: 10px; /* Espacement entre les colonnes et les lignes */
-  align-items: start; /* Alignement des éléments en début de chaque cellule de grille */
-  justify-items: start; /* Alignement horizontal des éléments de grille */
-  align-items: start; /* Alignement vertical des éléments de grille */
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 10px; 
+  align-items: start; 
+  justify-items: start; 
+  align-items: start; 
   font-size: 16px;
 
 }
@@ -76,41 +76,40 @@ li.strikethrough {
   text-decoration: line-through;
 }
 .title {
-  font-size: 24px; /* Taille de la police */
-  font-family: Arial, sans-serif; /* Police de caractères */
-  color: #333; /* Couleur du texte */
-  text-align: center; /* Alignement du texte */
-  background-color: #F2F2F2; /* Couleur de fond */
-  padding: 10px; /* Espace intérieur du titre */
-  border: 2px solid #666; /* Bordure */
-  border-radius: 10px; /* Coins arrondis */
+  font-size: 24px; 
+  font-family: Arial, sans-serif; 
+  color: #333; 
+  text-align: center;
+  background-color: #F2F2F2;
+  padding: 10px; 
+  border: 2px solid #666; 
+  border-radius: 10px;
 }
 .submitZebre {
-  background-color: #79aa79; /* Couleur de fond */
-  color: white; /* Couleur du texte */
-  padding: 15px 32px; /* Padding */
-  text-align: center; /* Alignement du texte */
-  text-decoration: none; /* Pas de soulignement */
-  display: inline-block; /* Type d'affichage */
-  font-size: 16px; /* Taille de la police */
-  margin: 4px 2px; /* Marge autour du bouton */
-  cursor: pointer; /* Curseur en forme de main */
-  border: none; /* Pas de bordure */
-  border-radius: 5px; /* Bordures arrondies */
+  background-color: #79aa79;
+  color: white; 
+  padding: 15px 32px; 
+  text-align: center; 
+  text-decoration: none; 
+  display: inline-block; 
+  font-size: 16px; 
+  margin: 4px 2px; 
+  cursor: pointer; 
+  border: none; 
+  border-radius: 5px; 
   left: 40%;
 
 }
 
 button.submitZebre:disabled {
-  /* Ici, vous pouvez ajouter vos styles pour le bouton désactivé */
-  background-color: #ccc; /* Couleur de fond grise pour indiquer qu'il est désactivé */
-  color: #666; /* Couleur du texte plus sombre */
-  cursor: not-allowed; /* Change le curseur pour indiquer qu'il n'est pas cliquable */
-  border: 1px solid #999; /* Optionnel: change la bordure pour le bouton désactivé */
+  background-color: #ccc; 
+  color: #666; 
+  cursor: not-allowed; 
+  border: 1px solid #999; 
 }
 
 .conteneur-bouton {
-  text-align: center; /* Centrer le bouton */
-  margin-top: 20px; /* Espace au-dessus du bouton */
-  bottom: 0; /* Aligner au bas */
+  text-align: center; 
+  margin-top: 20px;
+  bottom: 0; 
 }

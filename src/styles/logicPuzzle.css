@@ -1,5 +1,5 @@
 .table {
-  width: 40%; /* Exemple : ajustez selon les besoins de votre mise en page */
+  width: 40%; 
   border-collapse: collapse;
   margin-top: 50px;
   border-spacing: 0;
@@ -8,9 +8,9 @@
 
 }
 .title {
-  font-size: 28px; /* Taille de la police */
-  font-family: Arial, sans-serif; /* Police de caractères */
-  color: #333; /* Couleur du texte */
+  font-size: 28px; 
+  font-family: Arial, sans-serif; 
+  color: #333; 
   text-align: center; /* Alignement du texte */
   background-color: #F2F2F2; /* Couleur de fond */
   padding: 10px; /* Espace intérieur du titre */
@@ -83,8 +83,8 @@
     left: 0;
     width: 100%;
     height: 1px;
-    background-color: blue; /* Couleur de la ligne */
-    display: none; /* La ligne est initialement masquée */
+    background-color: blue; 
+    display: none; 
 }
 ul {
   padding: 0;
@@ -104,53 +104,53 @@ li {
 
 }
 .submit {
-  background-color: #79aa79; /* Couleur de fond */
-  color: white; /* Couleur du texte */
-  padding: 15px 32px; /* Padding */
-  text-align: center; /* Alignement du texte */
-  text-decoration: none; /* Pas de soulignement */
-  display: inline-block; /* Type d'affichage */
-  font-size: 16px; /* Taille de la police */
-  margin: 4px 2px; /* Marge autour du bouton */
-  cursor: pointer; /* Curseur en forme de main */
-  border: none; /* Pas de bordure */
-  border-radius: 5px; /* Bordures arrondies */
+  background-color: #4f7a51; 
+  color: white; 
+  padding: 15px 32px; 
+  text-align: center; 
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px; 
+  margin: 4px 2px; 
+  cursor: pointer; 
+  border: none; 
+  border-radius: 5px; 
 }
 button.submit:disabled {
-  /* Ici, vous pouvez ajouter vos styles pour le bouton désactivé */
-  background-color: #ccc; /* Couleur de fond grise pour indiquer qu'il est désactivé */
-  color: #666; /* Couleur du texte plus sombre */
-  cursor: not-allowed; /* Change le curseur pour indiquer qu'il n'est pas cliquable */
-  border: 1px solid #999; /* Optionnel: change la bordure pour le bouton désactivé */
+  
+  background-color: #ccc;
+  color: #666; 
+  cursor: not-allowed; 
+  border: 1px solid #999; 
 }
 
 .conteneur-bouton {
-  text-align: center; /* Centrer le bouton */
-  margin-top: 20px; /* Espace au-dessus du bouton */
-  bottom: 0; /* Aligner au bas */
+  text-align: center; 
+  margin-top: 20px; 
+  bottom: 0; 
 }
 
 
 h1 {
-  font-size: 30px; /* Grande taille pour le titre */
-  color: #212529; /* Couleur sombre pour le titre */
-  margin-bottom: 0.5em; /* Espacement après le titre */
+  font-size: 30px; 
+  color: #212529; 
+  margin-bottom: 0.5em; 
 }
 
 p , .clues {
-  font-size: 18px; /* Taille de police augmentée pour le paragraphe */
-  color: #212529; /* Couleur sombre pour le paragraphe */
-  line-height: 2; /* Espacement des lignes pour une meilleure lisibilité */
+  font-size: 18px; 
+  color: #212529; 
+  line-height: 2;
   margin-left: 40px;
 }
 p {
   margin: 20px ;
 }
 .vertical-header {
-  padding: 0; /* ajustez ou supprimez le padding selon vos besoins */
-  transform: rotate(180deg); /* retourne le texte pour qu'il soit lisible de gauche à droite */
+  padding: 0; 
+  transform: rotate(180deg); 
   white-space: nowrap;
   border: 1px solid #6d6262;
   writing-mode: vertical-lr; /* oriente le texte de haut en bas */
-  width: 25px; /* Réduit la largeur de la cellule si elle est vide */
+  width: 25px; 
 }
