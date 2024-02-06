@@ -19,7 +19,6 @@ const constraint = [
   "Ne veut pas aller en Belgique",
 ]
 
-
 const constraintValue = {
   "Veut voyager par train": "constraint voyage_par[-] == Train",
   "Ne veut pas Voyager par avion": "constraint voyage_par[-] != Plane",
@@ -37,7 +36,7 @@ const constraintValue = {
 function PersonalizedPuzzle() {
 
   const location = useLocation();
-  const { people } = location.state; // Accéder à `people` passé
+  const { people } = location.state; 
   const [selectedPerson, setSelectedPerson] = useState(null);
   const [selectedConstraint, setSelectedConstraint] = useState(null);
   const [associations, setAssociations] = useState([]);
@@ -88,11 +87,9 @@ function PersonalizedPuzzle() {
 
         })
         .catch(function (error) {
-          // handle error
           console.log(error);
         })
         .then(function () {
-          // always executed
         });
 
     } else {

@@ -1,14 +1,19 @@
-# Prerequisites
-Make sure you have Node.js installed on your machine (version 16.x or higher).
+## Prérequis
 
-# Installation
+Assurez-vous d'avoir Node.js installé sur votre machine (version 16.x ou ultérieure).
+
+Pour télécharger Node.js, rendez-vous sur le site officiel https://nodejs.org/ et téléchargez la version 16.x ou ultérieure adaptée à votre système d'exploitation.
+
+## Installation
+
+### 1 - Récuperer le projet depuis github
 
 git clone git@github.com:isJlaiel/jeux_frontend.git
 
-### Install the project dependencies:
+### 2- Installer les dépendances du projet :
 
 npm install
 
-### npm install
+### 3 Lancer le projet
 
 npm run dev
