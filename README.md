@@ -2,7 +2,7 @@
 
 Assurez-vous d'avoir Node.js installé sur votre machine (version 16.x ou ultérieure).
 
-Pour télécharger Node.js, rendez-vous sur le site officiel https://nodejs.org/ et téléchargez la version 16.x ou ultérieure adaptée à votre système d'exploitation.
+Pour télécharger Node.js, rendez-vous sur le site officiel https://nodejs.org/ 
 
 ## Installation
 
