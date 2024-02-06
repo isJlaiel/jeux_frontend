@@ -56,7 +56,18 @@ function ZebrePuzzle() {
     womansCopy.forEach(w => {
       delete w.id;
     })
-    let dataStr = JSON.stringify(womansCopy.filter((w) => w.Name != "" && w.Age != "" && w.Wine && w.Pasta && w.Shirt && w.Surname != ""));
+
+    const womansCopyNonVides = womansCopy.map(w => {
+      const newObjet = {};
+      for (const [cle, valeur] of Object.entries(w)) {
+        if (valeur !== "") {
+          newObjet[cle] = valeur;
+        }
+      }
+      return newObjet;
+    });
+    
+    let dataStr = JSON.stringify(womansCopyNonVides);
 
     dataStr = dataStr.trim().slice(1, -1).replace(/},{/g, "}|{");
     console.log(dataStr);
@@ -90,7 +101,7 @@ function ZebrePuzzle() {
 
     const newWomans = womans.filter(e => e.Age !== "" && e.Name !== "" && e.Pasta !== "" && e.Shirt !== "" && e.Wine !== "");
     const newWomansProp = womans.filter(e => e.Age !== "" || e.Name !== "" || e.Pasta !== "" || e.Shirt !== "" || e.Wine !== "");
-    setActivatePropButton(newWomansProp.length > 0 && newWomansProp.length < 5 )
+    setActivatePropButton(newWomansProp.length > 0 && newWomans.length < 5 )
     setActivateAnswerButton(newWomans.length == 5)
   }
 
